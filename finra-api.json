@@ -1,0 +1,75 @@
+{
+  "$connector_name": "FINRA OTC Transparency API Connector",
+  "$connector_label": "FINRA OTC",
+  "$connector_description": "Connector for FINRA OTC Transparency API - provides access to bond and equity trade data",
+  "$hostname": "https://api.finra.org",
+  "$authentication": "api_key",
+  "$tables": {
+    "BOND_TRADES": {
+      "$path": ["/data/group/otcMarket/name/bondTradeActivity"],
+      "tradeReportDate": "DATE",
+      "tradeReportTime": "TIME",
+      "issueSymbolIdentifier": "VARCHAR",
+      "bondSymbolIdentifier": "VARCHAR",
+      "contraPartyType": "VARCHAR",
+      "tradeStatus": "VARCHAR",
+      "whenIssuedIndicator": "VARCHAR",
+      "quantityTraded": "INTEGER",
+      "priceOfExecution": "DECIMAL",
+      "yieldAtExecution": "DECIMAL",
+      "remuneration": "DECIMAL",
+      "specialPriceIndicator": "VARCHAR",
+      "tradeModifier3": "VARCHAR",
+      "tradeModifier4": "VARCHAR",
+      "buyCapacityIndicator": "VARCHAR",
+      "sellCapacityIndicator": "VARCHAR",
+      "ROWID": "VARCHAR,$key"
+    },
+    "EQUITY_TRADES": {
+      "$path": ["/data/group/otcMarket/name/equityTradeActivity"],
+      "tradeReportDate": "DATE",
+      "tradeReportTime": "TIME",
+      "issueSymbolIdentifier": "VARCHAR",
+      "contraPartyType": "VARCHAR",
+      "tradeStatus": "VARCHAR",
+      "quantityTraded": "INTEGER",
+      "priceOfExecution": "DECIMAL",
+      "remuneration": "DECIMAL",
+      "specialPriceIndicator": "VARCHAR",
+      "buyCapacityIndicator": "VARCHAR",
+      "sellCapacityIndicator": "VARCHAR",
+      "ROWID": "VARCHAR,$key"
+    },
+    "BOND_REFERENCE": {
+      "$path": ["/data/group/otcMarket/name/bondReference"],
+      "issueSymbolIdentifier": "VARCHAR,$key",
+      "bondSymbolIdentifier": "VARCHAR",
+      "issuerName": "VARCHAR",
+      "couponRate": "DECIMAL",
+      "maturityDate": "DATE",
+      "callableIndicator": "VARCHAR",
+      "convertibleIndicator": "VARCHAR",
+      "whenIssuedIndicator": "VARCHAR",
+      "securityType": "VARCHAR",
+      "subProductType": "VARCHAR"
+    },
+    "EQUITY_REFERENCE": {
+      "$path": ["/data/group/otcMarket/name/equityReference"],
+      "issueSymbolIdentifier": "VARCHAR,$key",
+      "issuerName": "VARCHAR",
+      "securityType": "VARCHAR",
+      "marketCategory": "VARCHAR",
+      "tierIdentifier": "VARCHAR"
+    },
+    "ATS_ISSUE_DATA": {
+      "$path": ["/data/group/otcMarket/name/atsIssueData"],
+      "weekStartDate": "DATE",
+      "issueSymbolIdentifier": "VARCHAR",
+      "tierIdentifier": "VARCHAR",
+      "atsIdentifier": "VARCHAR",
+      "totalWeeklyShareQuantity": "BIGINT",
+      "totalWeeklyTradeCount": "INTEGER",
+      "ROWID": "VARCHAR,$key"
+    }
+  }
+}

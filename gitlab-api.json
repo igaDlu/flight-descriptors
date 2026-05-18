@@ -1,0 +1,212 @@
+{
+  "$connector_name": "GitLab REST API Connector",
+  "$connector_label": "GitLab",
+  "$connector_description": "Connector for GitLab REST API - provides access to projects, issues, merge requests, pipelines, and user data",
+  "$hostname": "https://gitlab.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "PROJECTS": {
+      "$path": ["/api/v4/projects"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "path": "VARCHAR",
+      "description": "VARCHAR",
+      "visibility": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "last_activity_at": "TIMESTAMP",
+      "namespace": "VARCHAR",
+      "web_url": "VARCHAR",
+      "star_count": "INTEGER",
+      "forks_count": "INTEGER",
+      "open_issues_count": "INTEGER"
+    },
+    "ISSUES": {
+      "$path": ["/api/v4/issues"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "iid": "INTEGER",
+      "project_id": "INTEGER",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "state": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "closed_at": "TIMESTAMP",
+      "labels": "VARCHAR",
+      "author": "VARCHAR",
+      "assignees": "VARCHAR",
+      "web_url": "VARCHAR"
+    },
+    "MERGE_REQUESTS": {
+      "$path": ["/api/v4/merge_requests"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "iid": "INTEGER",
+      "project_id": "INTEGER",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "state": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "merged_at": "TIMESTAMP",
+      "closed_at": "TIMESTAMP",
+      "source_branch": "VARCHAR",
+      "target_branch": "VARCHAR",
+      "author": "VARCHAR",
+      "assignees": "VARCHAR",
+      "labels": "VARCHAR",
+      "web_url": "VARCHAR"
+    },
+    "PIPELINES": {
+      "$path": ["/api/v4/projects/{project_id}/pipelines"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "project_id": "INTEGER",
+      "status": "VARCHAR",
+      "ref": "VARCHAR",
+      "sha": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "web_url": "VARCHAR"
+    },
+    "COMMITS": {
+      "$path": ["/api/v4/projects/{project_id}/repository/commits"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "short_id": "VARCHAR",
+      "title": "VARCHAR",
+      "message": "VARCHAR",
+      "author_name": "VARCHAR",
+      "author_email": "VARCHAR",
+      "authored_date": "TIMESTAMP",
+      "committer_name": "VARCHAR",
+      "committer_email": "VARCHAR",
+      "committed_date": "TIMESTAMP",
+      "created_at": "TIMESTAMP",
+      "web_url": "VARCHAR"
+    },
+    "USERS": {
+      "$path": ["/api/v4/users"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "username": "VARCHAR",
+      "name": "VARCHAR",
+      "email": "VARCHAR",
+      "state": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "bio": "VARCHAR",
+      "location": "VARCHAR",
+      "web_url": "VARCHAR"
+    },
+    "GROUPS": {
+      "$path": ["/api/v4/groups"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "path": "VARCHAR",
+      "description": "VARCHAR",
+      "visibility": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "web_url": "VARCHAR"
+    },
+    "MILESTONES": {
+      "$path": ["/api/v4/projects/{project_id}/milestones"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "iid": "INTEGER",
+      "project_id": "INTEGER",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "state": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "due_date": "DATE",
+      "start_date": "DATE",
+      "web_url": "VARCHAR"
+    },
+    "BRANCHES": {
+      "$path": ["/api/v4/projects/{project_id}/repository/branches"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "name": "VARCHAR,$key",
+      "merged": "BOOLEAN",
+      "protected": "BOOLEAN",
+      "default": "BOOLEAN",
+      "developers_can_push": "BOOLEAN",
+      "developers_can_merge": "BOOLEAN",
+      "can_push": "BOOLEAN",
+      "web_url": "VARCHAR",
+      "commit": "VARCHAR"
+    },
+    "TAGS": {
+      "$path": ["/api/v4/projects/{project_id}/repository/tags"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "name": "VARCHAR,$key",
+      "message": "VARCHAR",
+      "target": "VARCHAR",
+      "commit": "VARCHAR",
+      "release": "VARCHAR",
+      "protected": "BOOLEAN"
+    }
+  }
+}

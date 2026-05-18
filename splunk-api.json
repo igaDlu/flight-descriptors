@@ -1,0 +1,119 @@
+{
+  "$connector_name": "Splunk REST API Connector",
+  "$connector_label": "Splunk",
+  "$connector_description": "Connector for Splunk REST API - provides access to search jobs, saved searches, alerts, indexes, and configuration data",
+  "$hostname": "https://your-splunk-instance.com:8089",
+  "$authentication": "basic",
+  "$tables": {
+    "SEARCH_JOBS": {
+      "$path": ["/services/search/jobs"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "SAVED_SEARCHES": {
+      "$path": ["/services/saved/searches"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "ALERTS": {
+      "$path": ["/services/alerts/fired_alerts"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "INDEXES": {
+      "$path": ["/services/data/indexes"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "APPS": {
+      "$path": ["/services/apps/local"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "USERS": {
+      "$path": ["/services/authentication/users"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "ROLES": {
+      "$path": ["/services/authorization/roles"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "DASHBOARDS": {
+      "$path": ["/services/data/ui/views"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "DATA_MODELS": {
+      "$path": ["/services/datamodel/model"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    },
+    "LOOKUPS": {
+      "$path": ["/services/data/lookup-table-files"],
+      "$data_path": "entry",
+      "name": "VARCHAR,$key",
+      "id": "VARCHAR",
+      "title": "VARCHAR",
+      "updated": "TIMESTAMP",
+      "published": "TIMESTAMP",
+      "author": "VARCHAR",
+      "content": "VARCHAR"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$connector_name": "PayPal REST API Connector",
+  "$connector_label": "PayPal API",
+  "$connector_description": "Connector for PayPal REST API - provides access to orders, payments, and transaction data",
+  "$hostname": "https://api.paypal.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "ORDERS": {
+      "$path": ["/v2/checkout/orders"],
+      "id": "VARCHAR,$key",
+      "intent": "VARCHAR",
+      "status": "VARCHAR",
+      "purchase_units": "VARCHAR",
+      "payer": "VARCHAR",
+      "create_time": "TIMESTAMP",
+      "update_time": "TIMESTAMP",
+      "links": "VARCHAR"
+    },
+    "PAYMENTS": {
+      "$path": ["/v2/payments/captures"],
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "amount[]": {
+        "currency_code": "VARCHAR",
+        "value": "DECIMAL"
+      },
+      "final_capture": "BOOLEAN",
+      "seller_protection": "VARCHAR",
+      "seller_receivable_breakdown": "VARCHAR",
+      "invoice_id": "VARCHAR",
+      "custom_id": "VARCHAR",
+      "create_time": "TIMESTAMP",
+      "update_time": "TIMESTAMP",
+      "links": "VARCHAR"
+    },
+    "REFUNDS": {
+      "$path": ["/v2/payments/refunds"],
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "amount[]": {
+        "currency_code": "VARCHAR",
+        "value": "DECIMAL"
+      },
+      "invoice_id": "VARCHAR",
+      "custom_id": "VARCHAR",
+      "note_to_payer": "VARCHAR",
+      "seller_payable_breakdown": "VARCHAR",
+      "create_time": "TIMESTAMP",
+      "update_time": "TIMESTAMP",
+      "links": "VARCHAR"
+    },
+    "AUTHORIZATIONS": {
+      "$path": ["/v2/payments/authorizations"],
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "amount[]": {
+        "currency_code": "VARCHAR",
+        "value": "DECIMAL"
+      },
+      "invoice_id": "VARCHAR",
+      "custom_id": "VARCHAR",
+      "seller_protection": "VARCHAR",
+      "expiration_time": "TIMESTAMP",
+      "create_time": "TIMESTAMP",
+      "update_time": "TIMESTAMP",
+      "links": "VARCHAR"
+    },
+    "PAYMENT_TOKENS": {
+      "$path": ["/v3/vault/payment-tokens"],
+      "id": "VARCHAR,$key",
+      "customer": "VARCHAR",
+      "payment_source": "VARCHAR",
+      "links": "VARCHAR"
+    }
+  }
+}

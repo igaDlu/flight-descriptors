@@ -1,0 +1,36 @@
+{
+  "$connector_name": "Zoom API Connector",
+  "$connector_label": "Zoom API",
+  "$connector_description": "Connector for Zoom REST API - provides access to users, meetings, and other Zoom resources",
+  "$hostname": "https://api.zoom.us/v2",
+  "$authentication": "oauth2",
+  "$tables": {
+    "USERS": {
+      "$path": ["/users"],
+      "$data_path": "users",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "next_page_token",
+        "next_cursor_path": "next_page_token",
+        "page_size": 300
+      },
+      "id": "VARCHAR,$key",
+      "first_name": "VARCHAR",
+      "last_name": "VARCHAR",
+      "email": "VARCHAR",
+      "type": "INTEGER",
+      "pmi": "BIGINT",
+      "timezone": "VARCHAR",
+      "verified": "INTEGER",
+      "dept": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "last_login_time": "TIMESTAMP",
+      "last_client_version": "VARCHAR",
+      "pic_url": "VARCHAR",
+      "language": "VARCHAR",
+      "phone_number": "VARCHAR",
+      "status": "VARCHAR",
+      "role_id": "VARCHAR"
+    }
+  }
+}

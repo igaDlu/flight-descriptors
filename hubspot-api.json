@@ -1,0 +1,216 @@
+{
+  "$connector_name": "HubSpot CRM API Connector",
+  "$connector_label": "HubSpot CRM",
+  "$connector_description": "Connector for HubSpot CRM API - provides access to contacts, companies, deals, tickets, and marketing data",
+  "$hostname": "https://api.hubapi.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "CONTACTS": {
+      "$path": ["/crm/v3/objects/contacts"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "firstname": "VARCHAR",
+        "lastname": "VARCHAR",
+        "email": "VARCHAR",
+        "phone": "VARCHAR",
+        "company": "VARCHAR",
+        "website": "VARCHAR",
+        "lifecyclestage": "VARCHAR",
+        "hs_lead_status": "VARCHAR",
+        "createdate": "TIMESTAMP",
+        "lastmodifieddate": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "COMPANIES": {
+      "$path": ["/crm/v3/objects/companies"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "name": "VARCHAR",
+        "domain": "VARCHAR",
+        "city": "VARCHAR",
+        "state": "VARCHAR",
+        "country": "VARCHAR",
+        "industry": "VARCHAR",
+        "phone": "VARCHAR",
+        "numberofemployees": "INTEGER",
+        "annualrevenue": "DECIMAL",
+        "createdate": "TIMESTAMP",
+        "hs_lastmodifieddate": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "DEALS": {
+      "$path": ["/crm/v3/objects/deals"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "dealname": "VARCHAR",
+        "amount": "DECIMAL",
+        "dealstage": "VARCHAR",
+        "pipeline": "VARCHAR",
+        "closedate": "TIMESTAMP",
+        "createdate": "TIMESTAMP",
+        "hs_lastmodifieddate": "TIMESTAMP",
+        "hubspot_owner_id": "VARCHAR"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "TICKETS": {
+      "$path": ["/crm/v3/objects/tickets"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "subject": "VARCHAR",
+        "content": "VARCHAR",
+        "hs_pipeline": "VARCHAR",
+        "hs_pipeline_stage": "VARCHAR",
+        "hs_ticket_priority": "VARCHAR",
+        "hs_ticket_category": "VARCHAR",
+        "createdate": "TIMESTAMP",
+        "hs_lastmodifieddate": "TIMESTAMP",
+        "hubspot_owner_id": "VARCHAR"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "ENGAGEMENTS_EMAILS": {
+      "$path": ["/crm/v3/objects/emails"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "hs_email_subject": "VARCHAR",
+        "hs_email_text": "VARCHAR",
+        "hs_email_status": "VARCHAR",
+        "hs_email_direction": "VARCHAR",
+        "hs_timestamp": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "ENGAGEMENTS_CALLS": {
+      "$path": ["/crm/v3/objects/calls"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "hs_call_title": "VARCHAR",
+        "hs_call_body": "VARCHAR",
+        "hs_call_duration": "INTEGER",
+        "hs_call_status": "VARCHAR",
+        "hs_call_direction": "VARCHAR",
+        "hs_timestamp": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "ENGAGEMENTS_MEETINGS": {
+      "$path": ["/crm/v3/objects/meetings"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "hs_meeting_title": "VARCHAR",
+        "hs_meeting_body": "VARCHAR",
+        "hs_meeting_outcome": "VARCHAR",
+        "hs_meeting_start_time": "TIMESTAMP",
+        "hs_meeting_end_time": "TIMESTAMP",
+        "hs_timestamp": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "ENGAGEMENTS_NOTES": {
+      "$path": ["/crm/v3/objects/notes"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "hs_note_body": "VARCHAR",
+        "hs_timestamp": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    },
+    "ENGAGEMENTS_TASKS": {
+      "$path": ["/crm/v3/objects/tasks"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "paging.next.after",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "properties[]": {
+        "hs_task_subject": "VARCHAR",
+        "hs_task_body": "VARCHAR",
+        "hs_task_status": "VARCHAR",
+        "hs_task_priority": "VARCHAR",
+        "hs_task_type": "VARCHAR",
+        "hs_timestamp": "TIMESTAMP"
+      },
+      "createdAt": "TIMESTAMP",
+      "updatedAt": "TIMESTAMP",
+      "archived": "BOOLEAN"
+    }
+  }
+}

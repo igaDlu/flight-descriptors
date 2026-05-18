@@ -1,0 +1,161 @@
+{
+  "$connector_name": "Outreach API Connector",
+  "$connector_label": "Outreach",
+  "$connector_description": "Connector for Outreach Sales Engagement Platform API - provides access to prospects, accounts, sequences, and engagement data",
+  "$hostname": "https://api.outreach.io",
+  "$authentication": "oauth2",
+  "$tables": {
+    "PROSPECTS": {
+      "$path": ["/api/v2/prospects"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "firstName": "VARCHAR",
+        "lastName": "VARCHAR",
+        "emails": "VARCHAR",
+        "title": "VARCHAR",
+        "company": "VARCHAR",
+        "timezone": "VARCHAR",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    },
+    "ACCOUNTS": {
+      "$path": ["/api/v2/accounts"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "name": "VARCHAR",
+        "domain": "VARCHAR",
+        "industry": "VARCHAR",
+        "locality": "VARCHAR",
+        "numberOfEmployees": "INTEGER",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    },
+    "SEQUENCES": {
+      "$path": ["/api/v2/sequences"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "name": "VARCHAR",
+        "description": "VARCHAR",
+        "enabled": "BOOLEAN",
+        "numSteps": "INTEGER",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    },
+    "MAILINGS": {
+      "$path": ["/api/v2/mailings"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "subject": "VARCHAR",
+        "bodyText": "VARCHAR",
+        "state": "VARCHAR",
+        "mailboxAddress": "VARCHAR",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP",
+        "sentAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    },
+    "CALLS": {
+      "$path": ["/api/v2/calls"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "outcome": "VARCHAR",
+        "sentiment": "VARCHAR",
+        "note": "VARCHAR",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP",
+        "completedAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    },
+    "TASKS": {
+      "$path": ["/api/v2/tasks"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "action": "VARCHAR",
+        "note": "VARCHAR",
+        "state": "VARCHAR",
+        "dueAt": "TIMESTAMP",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP",
+        "completedAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    },
+    "OPPORTUNITIES": {
+      "$path": ["/api/v2/opportunities"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page[after]",
+        "next_cursor_path": "links.next",
+        "page_size": 100
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "attributes[]": {
+        "name": "VARCHAR",
+        "amount": "DECIMAL",
+        "probability": "DECIMAL",
+        "stage": "VARCHAR",
+        "createdAt": "TIMESTAMP",
+        "updatedAt": "TIMESTAMP"
+      },
+      "relationships": "VARCHAR"
+    }
+  }
+}

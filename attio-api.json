@@ -1,0 +1,102 @@
+{
+  "$connector_name": "Attio API Connector",
+  "$connector_label": "Attio CRM",
+  "$connector_description": "Connector for Attio CRM API - provides access to companies, people, lists, notes, and tasks",
+  "$hostname": "https://api.attio.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "COMPANIES": {
+      "$path": ["/v2/objects/companies/records"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "offset",
+        "next_cursor_path": "next_offset",
+        "page_size": 100
+      },
+      "id[]": {
+        "workspace_id": "VARCHAR",
+        "object_id": "VARCHAR",
+        "record_id": "VARCHAR,$key"
+      },
+      "created_at": "TIMESTAMP",
+      "values": "VARCHAR"
+    },
+    "PEOPLE": {
+      "$path": ["/v2/objects/people/records"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "offset",
+        "next_cursor_path": "next_offset",
+        "page_size": 100
+      },
+      "id[]": {
+        "workspace_id": "VARCHAR",
+        "object_id": "VARCHAR",
+        "record_id": "VARCHAR,$key"
+      },
+      "created_at": "TIMESTAMP",
+      "values": "VARCHAR"
+    },
+    "LISTS": {
+      "$path": ["/v2/lists"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "offset",
+        "next_cursor_path": "next_offset",
+        "page_size": 100
+      },
+      "id[]": {
+        "list_id": "VARCHAR,$key"
+      },
+      "name": "VARCHAR",
+      "workspace_id": "VARCHAR",
+      "parent_object": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "workspace_access": "VARCHAR",
+      "api_slug": "VARCHAR"
+    },
+    "NOTES": {
+      "$path": ["/v2/notes"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "offset",
+        "next_cursor_path": "next_offset",
+        "page_size": 100
+      },
+      "id[]": {
+        "note_id": "VARCHAR,$key"
+      },
+      "title": "VARCHAR",
+      "content": "VARCHAR",
+      "format": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "created_by_actor": "VARCHAR",
+      "parent_object": "VARCHAR",
+      "parent_record_id": "VARCHAR"
+    },
+    "TASKS": {
+      "$path": ["/v2/tasks"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "offset",
+        "next_cursor_path": "next_offset",
+        "page_size": 100
+      },
+      "id[]": {
+        "task_id": "VARCHAR,$key"
+      },
+      "content": "VARCHAR",
+      "format": "VARCHAR",
+      "is_completed": "BOOLEAN",
+      "deadline_at": "TIMESTAMP",
+      "created_at": "TIMESTAMP",
+      "assignees": "VARCHAR",
+      "linked_records": "VARCHAR"
+    }
+  }
+}

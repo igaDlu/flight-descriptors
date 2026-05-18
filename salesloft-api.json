@@ -1,0 +1,175 @@
+{
+  "$connector_name": "SalesLoft API Connector",
+  "$connector_label": "SalesLoft",
+  "$connector_description": "Connector for SalesLoft Sales Engagement Platform API - provides access to people, accounts, cadences, and activity data",
+  "$hostname": "https://api.salesloft.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "PEOPLE": {
+      "$path": ["/v2/people"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "first_name": "VARCHAR",
+      "last_name": "VARCHAR",
+      "email_address": "VARCHAR",
+      "title": "VARCHAR",
+      "city": "VARCHAR",
+      "state": "VARCHAR",
+      "country": "VARCHAR",
+      "phone": "VARCHAR",
+      "account_id": "INTEGER",
+      "owner_id": "INTEGER"
+    },
+    "ACCOUNTS": {
+      "$path": ["/v2/accounts"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "name": "VARCHAR",
+      "domain": "VARCHAR",
+      "city": "VARCHAR",
+      "state": "VARCHAR",
+      "country": "VARCHAR",
+      "size": "VARCHAR",
+      "industry": "VARCHAR",
+      "owner_id": "INTEGER"
+    },
+    "CADENCES": {
+      "$path": ["/v2/cadences"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "name": "VARCHAR",
+      "archived": "BOOLEAN",
+      "team_cadence": "BOOLEAN",
+      "shared": "BOOLEAN",
+      "owner_id": "INTEGER"
+    },
+    "CADENCE_MEMBERSHIPS": {
+      "$path": ["/v2/cadence_memberships"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "added_at": "TIMESTAMP",
+      "person_id": "INTEGER",
+      "cadence_id": "INTEGER",
+      "user_id": "INTEGER",
+      "current_state": "VARCHAR"
+    },
+    "ACTIONS": {
+      "$path": ["/v2/actions"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "due_on": "DATE",
+      "type": "VARCHAR",
+      "status": "VARCHAR",
+      "person_id": "INTEGER",
+      "cadence_id": "INTEGER",
+      "step_id": "INTEGER",
+      "user_id": "INTEGER"
+    },
+    "CALLS": {
+      "$path": ["/v2/calls"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "called_at": "TIMESTAMP",
+      "duration": "INTEGER",
+      "sentiment": "VARCHAR",
+      "disposition": "VARCHAR",
+      "to": "VARCHAR",
+      "person_id": "INTEGER",
+      "user_id": "INTEGER"
+    },
+    "EMAILS": {
+      "$path": ["/v2/emails"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "sent_at": "TIMESTAMP",
+      "subject": "VARCHAR",
+      "status": "VARCHAR",
+      "bounced": "BOOLEAN",
+      "recipient_email_address": "VARCHAR",
+      "person_id": "INTEGER",
+      "user_id": "INTEGER",
+      "cadence_id": "INTEGER"
+    },
+    "NOTES": {
+      "$path": ["/v2/notes"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "content": "VARCHAR",
+      "person_id": "INTEGER",
+      "account_id": "INTEGER",
+      "user_id": "INTEGER"
+    }
+  }
+}
