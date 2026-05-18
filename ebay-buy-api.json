@@ -1,0 +1,137 @@
+{
+  "$connector_name": "eBay Buy API Connector",
+  "$connector_label": "eBay Buy API",
+  "$connector_description": "Connector for eBay Buy API - provides access to item search, browse, and shopping data",
+  "$hostname": "https://api.ebay.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "ITEM_SUMMARY": {
+      "$path": ["/buy/browse/v1/item_summary/search"],
+      "$data_path": "itemSummaries",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "itemId": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "leafCategoryIds": "VARCHAR",
+      "categories": "VARCHAR",
+      "image[]": {
+        "imageUrl": "VARCHAR"
+      },
+      "price[]": {
+        "value": "VARCHAR",
+        "currency": "VARCHAR"
+      },
+      "itemHref": "VARCHAR",
+      "seller[]": {
+        "username": "VARCHAR",
+        "feedbackPercentage": "VARCHAR",
+        "feedbackScore": "INTEGER"
+      },
+      "condition": "VARCHAR",
+      "conditionId": "VARCHAR",
+      "thumbnailImages": "VARCHAR",
+      "shippingOptions": "VARCHAR",
+      "buyingOptions": "VARCHAR",
+      "itemAffiliateWebUrl": "VARCHAR",
+      "itemWebUrl": "VARCHAR",
+      "itemLocation[]": {
+        "postalCode": "VARCHAR",
+        "country": "VARCHAR"
+      },
+      "additionalImages": "VARCHAR",
+      "adultOnly": "BOOLEAN",
+      "legacyItemId": "VARCHAR",
+      "availableCoupons": "BOOLEAN",
+      "itemCreationDate": "TIMESTAMP",
+      "topRatedBuyingExperience": "BOOLEAN",
+      "priorityListing": "BOOLEAN",
+      "listingMarketplaceId": "VARCHAR"
+    },
+    "ITEM_DETAILS": {
+      "$path": ["/buy/browse/v1/item/{item_id}"],
+      "itemId": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "shortDescription": "VARCHAR",
+      "description": "VARCHAR",
+      "categoryPath": "VARCHAR",
+      "categoryIdPath": "VARCHAR",
+      "category[]": {
+        "categoryId": "VARCHAR",
+        "categoryName": "VARCHAR"
+      },
+      "price[]": {
+        "value": "VARCHAR",
+        "currency": "VARCHAR"
+      },
+      "condition": "VARCHAR",
+      "conditionId": "VARCHAR",
+      "conditionDescription": "VARCHAR",
+      "itemWebUrl": "VARCHAR",
+      "itemAffiliateWebUrl": "VARCHAR",
+      "image[]": {
+        "imageUrl": "VARCHAR"
+      },
+      "additionalImages": "VARCHAR",
+      "brand": "VARCHAR",
+      "mpn": "VARCHAR",
+      "gtin": "VARCHAR",
+      "color": "VARCHAR",
+      "material": "VARCHAR",
+      "pattern": "VARCHAR",
+      "seller[]": {
+        "username": "VARCHAR",
+        "feedbackPercentage": "VARCHAR",
+        "feedbackScore": "INTEGER",
+        "sellerAccountType": "VARCHAR"
+      },
+      "estimatedAvailabilities": "VARCHAR",
+      "shippingOptions": "VARCHAR",
+      "shipToLocations[]": {
+        "regionName": "VARCHAR",
+        "regionType": "VARCHAR"
+      },
+      "returnTerms[]": {
+        "returnsAccepted": "BOOLEAN",
+        "refundMethod": "VARCHAR",
+        "returnMethod": "VARCHAR",
+        "returnPeriod[]": {
+          "value": "INTEGER",
+          "unit": "VARCHAR"
+        }
+      },
+      "localizedAspects": "VARCHAR",
+      "topRatedBuyingExperience": "BOOLEAN",
+      "buyingOptions": "VARCHAR",
+      "itemCreationDate": "TIMESTAMP",
+      "itemEndDate": "TIMESTAMP",
+      "itemLocation[]": {
+        "city": "VARCHAR",
+        "stateOrProvince": "VARCHAR",
+        "postalCode": "VARCHAR",
+        "country": "VARCHAR"
+      },
+      "quantityLimitPerBuyer": "INTEGER",
+      "taxes": "VARCHAR",
+      "warnings": "VARCHAR",
+      "enabledForGuestCheckout": "BOOLEAN",
+      "eligibleForInlineCheckout": "BOOLEAN",
+      "lotSize": "INTEGER",
+      "legacyItemId": "VARCHAR",
+      "priorityListing": "BOOLEAN",
+      "adultOnly": "BOOLEAN",
+      "categoryId": "VARCHAR"
+    },
+    "SHOPPING_CART": {
+      "$path": ["/buy/browse/v1/shopping_cart/{cart_id}"],
+      "cartId": "VARCHAR,$key",
+      "cartWebUrl": "VARCHAR",
+      "cartItems": "VARCHAR",
+      "warnings": "VARCHAR"
+    }
+  }
+}

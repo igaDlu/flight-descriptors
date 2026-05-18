@@ -1,0 +1,253 @@
+{
+  "$connector_name": "Microsoft SharePoint API Connector",
+  "$connector_label": "SharePoint API",
+  "$connector_description": "Connector for Microsoft SharePoint REST API - provides access to sites, lists, list items, documents, and users",
+  "$hostname": "https://graph.microsoft.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "SITES": {
+      "$path": ["/v1.0/sites/{site-id}"],
+      "id": "VARCHAR,$key",
+      "createdDateTime": "TIMESTAMP",
+      "description": "VARCHAR",
+      "displayName": "VARCHAR",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "name": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "createdBy[]": {
+        "user": "VARCHAR"
+      },
+      "lastModifiedBy[]": {
+        "user": "VARCHAR"
+      },
+      "root": "VARCHAR",
+      "sharepointIds[]": {
+        "listId": "VARCHAR",
+        "listItemId": "VARCHAR",
+        "listItemUniqueId": "VARCHAR",
+        "siteId": "VARCHAR",
+        "siteUrl": "VARCHAR",
+        "tenantId": "VARCHAR",
+        "webId": "VARCHAR"
+      },
+      "siteCollection[]": {
+        "hostname": "VARCHAR",
+        "dataLocationCode": "VARCHAR",
+        "root": "VARCHAR"
+      }
+    },
+    "LISTS": {
+      "$path": ["/v1.0/sites/{site-id}/lists/{list-id}"],
+      "id": "VARCHAR,$key",
+      "createdDateTime": "TIMESTAMP",
+      "description": "VARCHAR",
+      "displayName": "VARCHAR",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "name": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "createdBy[]": {
+        "user": "VARCHAR"
+      },
+      "lastModifiedBy[]": {
+        "user": "VARCHAR"
+      },
+      "list[]": {
+        "contentTypesEnabled": "BOOLEAN",
+        "hidden": "BOOLEAN",
+        "template": "VARCHAR"
+      },
+      "parentReference[]": {
+        "siteId": "VARCHAR"
+      },
+      "sharepointIds[]": {
+        "listId": "VARCHAR",
+        "siteId": "VARCHAR",
+        "siteUrl": "VARCHAR",
+        "tenantId": "VARCHAR",
+        "webId": "VARCHAR"
+      }
+    },
+    "LIST_ITEMS": {
+      "$path": ["/v1.0/sites/{site-id}/lists/{list-id}/items"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink"
+      },
+      "id": "VARCHAR,$key",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "webUrl": "VARCHAR",
+      "createdBy[]": {
+        "user": "VARCHAR"
+      },
+      "lastModifiedBy[]": {
+        "user": "VARCHAR"
+      },
+      "parentReference[]": {
+        "id": "VARCHAR",
+        "siteId": "VARCHAR"
+      },
+      "contentType[]": {
+        "id": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "sharepointIds[]": {
+        "listId": "VARCHAR",
+        "listItemId": "VARCHAR",
+        "listItemUniqueId": "VARCHAR",
+        "siteId": "VARCHAR",
+        "siteUrl": "VARCHAR",
+        "tenantId": "VARCHAR",
+        "webId": "VARCHAR"
+      },
+      "fields": "VARCHAR"
+    },
+    "DOCUMENTS": {
+      "$path": ["/v1.0/sites/{site-id}/drive/items/{item-id}"],
+      "id": "VARCHAR,$key",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "name": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "size": "BIGINT",
+      "createdBy[]": {
+        "user": "VARCHAR",
+        "application": "VARCHAR"
+      },
+      "lastModifiedBy[]": {
+        "user": "VARCHAR",
+        "application": "VARCHAR"
+      },
+      "parentReference[]": {
+        "driveId": "VARCHAR",
+        "driveType": "VARCHAR",
+        "id": "VARCHAR",
+        "name": "VARCHAR",
+        "path": "VARCHAR",
+        "shareId": "VARCHAR",
+        "sharepointIds": "VARCHAR",
+        "siteId": "VARCHAR"
+      },
+      "file[]": {
+        "mimeType": "VARCHAR",
+        "hashes": "VARCHAR"
+      },
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "folder": "VARCHAR",
+      "shared": "VARCHAR",
+      "sharepointIds[]": {
+        "listId": "VARCHAR",
+        "listItemId": "VARCHAR",
+        "listItemUniqueId": "VARCHAR",
+        "siteId": "VARCHAR",
+        "siteUrl": "VARCHAR",
+        "tenantId": "VARCHAR",
+        "webId": "VARCHAR"
+      },
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR"
+    },
+    "DRIVE_ITEMS": {
+      "$path": ["/v1.0/sites/{site-id}/drive/root/children"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink"
+      },
+      "id": "VARCHAR,$key",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "name": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "size": "BIGINT",
+      "createdBy[]": {
+        "user": "VARCHAR"
+      },
+      "lastModifiedBy[]": {
+        "user": "VARCHAR"
+      },
+      "parentReference[]": {
+        "driveId": "VARCHAR",
+        "driveType": "VARCHAR",
+        "id": "VARCHAR",
+        "path": "VARCHAR"
+      },
+      "file[]": {
+        "mimeType": "VARCHAR",
+        "hashes": "VARCHAR"
+      },
+      "folder[]": {
+        "childCount": "INTEGER"
+      },
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      }
+    },
+    "USERS": {
+      "$path": ["/v1.0/users/{user-id}"],
+      "id": "VARCHAR,$key",
+      "businessPhones": "VARCHAR",
+      "displayName": "VARCHAR",
+      "givenName": "VARCHAR",
+      "jobTitle": "VARCHAR",
+      "mail": "VARCHAR",
+      "mobilePhone": "VARCHAR",
+      "officeLocation": "VARCHAR",
+      "preferredLanguage": "VARCHAR",
+      "surname": "VARCHAR",
+      "userPrincipalName": "VARCHAR",
+      "accountEnabled": "BOOLEAN",
+      "ageGroup": "VARCHAR",
+      "city": "VARCHAR",
+      "companyName": "VARCHAR",
+      "consentProvidedForMinor": "VARCHAR",
+      "country": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "creationType": "VARCHAR",
+      "department": "VARCHAR",
+      "employeeId": "VARCHAR",
+      "employeeHireDate": "TIMESTAMP",
+      "employeeType": "VARCHAR",
+      "faxNumber": "VARCHAR",
+      "imAddresses": "VARCHAR",
+      "isResourceAccount": "BOOLEAN",
+      "lastPasswordChangeDateTime": "TIMESTAMP",
+      "legalAgeGroupClassification": "VARCHAR",
+      "mailNickname": "VARCHAR",
+      "onPremisesDistinguishedName": "VARCHAR",
+      "onPremisesDomainName": "VARCHAR",
+      "onPremisesImmutableId": "VARCHAR",
+      "onPremisesLastSyncDateTime": "TIMESTAMP",
+      "onPremisesSamAccountName": "VARCHAR",
+      "onPremisesSecurityIdentifier": "VARCHAR",
+      "onPremisesSyncEnabled": "BOOLEAN",
+      "onPremisesUserPrincipalName": "VARCHAR",
+      "otherMails": "VARCHAR",
+      "passwordPolicies": "VARCHAR",
+      "postalCode": "VARCHAR",
+      "proxyAddresses": "VARCHAR",
+      "showInAddressList": "BOOLEAN",
+      "state": "VARCHAR",
+      "streetAddress": "VARCHAR",
+      "usageLocation": "VARCHAR",
+      "userType": "VARCHAR"
+    },
+    "SITE_USERS": {
+      "$path": ["/v1.0/sites/{site-id}/members"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink"
+      },
+      "id": "VARCHAR,$key",
+      "displayName": "VARCHAR",
+      "mail": "VARCHAR",
+      "userPrincipalName": "VARCHAR"
+    }
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "$connector_name": "Medallia API Connector",
+  "$connector_label": "Medallia Experience Cloud",
+  "$connector_description": "Connector for Medallia Reporting API - provides access to feedback, surveys, responses, users, and customer experience analytics",
+  "$hostname": "https://instance.apis.medallia.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "FEEDBACK_RESPONSES": {
+      "$path": ["/reporting/v1/responses"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 1000
+      },
+      "response_id": "VARCHAR,$key",
+      "survey_id": "VARCHAR",
+      "survey_name": "VARCHAR",
+      "response_date": "TIMESTAMP",
+      "completion_date": "TIMESTAMP",
+      "status": "VARCHAR",
+      "channel": "VARCHAR",
+      "language": "VARCHAR",
+      "respondent[]": {
+        "id": "VARCHAR",
+        "email": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "location[]": {
+        "id": "VARCHAR",
+        "name": "VARCHAR",
+        "country": "VARCHAR",
+        "region": "VARCHAR"
+      },
+      "nps_score": "INTEGER",
+      "csat_score": "INTEGER",
+      "ces_score": "INTEGER",
+      "sentiment": "VARCHAR",
+      "verbatim": "VARCHAR",
+      "tags": "VARCHAR",
+      "custom_fields": "VARCHAR",
+      "metadata": "VARCHAR"
+    },
+    "SURVEYS": {
+      "$path": ["/reporting/v1/surveys"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 100
+      },
+      "survey_id": "VARCHAR,$key",
+      "survey_name": "VARCHAR",
+      "survey_type": "VARCHAR",
+      "status": "VARCHAR",
+      "created_date": "TIMESTAMP",
+      "modified_date": "TIMESTAMP",
+      "description": "VARCHAR",
+      "language": "VARCHAR",
+      "channel": "VARCHAR",
+      "questions": "VARCHAR",
+      "logic": "VARCHAR",
+      "branding": "VARCHAR",
+      "settings": "VARCHAR"
+    },
+    "QUESTIONS": {
+      "$path": ["/reporting/v1/surveys/{survey_id}/questions"],
+      "$data_path": "data",
+      "question_id": "VARCHAR,$key",
+      "survey_id": "VARCHAR",
+      "question_text": "VARCHAR",
+      "question_type": "VARCHAR",
+      "order": "INTEGER",
+      "required": "BOOLEAN",
+      "options": "VARCHAR",
+      "logic": "VARCHAR",
+      "metadata": "VARCHAR"
+    },
+    "USERS": {
+      "$path": ["/reporting/v1/users"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 100
+      },
+      "user_id": "VARCHAR,$key",
+      "username": "VARCHAR",
+      "email": "VARCHAR",
+      "first_name": "VARCHAR",
+      "last_name": "VARCHAR",
+      "role": "VARCHAR",
+      "status": "VARCHAR",
+      "created_date": "TIMESTAMP",
+      "last_login": "TIMESTAMP",
+      "permissions": "VARCHAR",
+      "groups": "VARCHAR",
+      "locations": "VARCHAR"
+    },
+    "LOCATIONS": {
+      "$path": ["/reporting/v1/locations"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 100
+      },
+      "location_id": "VARCHAR,$key",
+      "location_name": "VARCHAR",
+      "location_code": "VARCHAR",
+      "address[]": {
+        "street": "VARCHAR",
+        "city": "VARCHAR",
+        "state": "VARCHAR",
+        "postal_code": "VARCHAR",
+        "country": "VARCHAR"
+      },
+      "hierarchy": "VARCHAR",
+      "parent_location_id": "VARCHAR",
+      "status": "VARCHAR",
+      "metadata": "VARCHAR"
+    },
+    "ANALYTICS_METRICS": {
+      "$path": ["/reporting/v1/analytics/metrics"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 1000
+      },
+      "metric_id": "VARCHAR,$key",
+      "metric_name": "VARCHAR",
+      "metric_type": "VARCHAR",
+      "period": "VARCHAR",
+      "date": "DATE",
+      "value": "DECIMAL",
+      "survey_id": "VARCHAR",
+      "location_id": "VARCHAR",
+      "segment": "VARCHAR",
+      "dimensions": "VARCHAR"
+    },
+    "NPS_SCORES": {
+      "$path": ["/reporting/v1/analytics/nps"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 1000
+      },
+      "record_id": "VARCHAR,$key",
+      "period": "VARCHAR",
+      "date": "DATE",
+      "nps_score": "DECIMAL",
+      "promoters": "INTEGER",
+      "passives": "INTEGER",
+      "detractors": "INTEGER",
+      "total_responses": "INTEGER",
+      "survey_id": "VARCHAR",
+      "location_id": "VARCHAR",
+      "segment": "VARCHAR",
+      "trend": "VARCHAR"
+    },
+    "CSAT_SCORES": {
+      "$path": ["/reporting/v1/analytics/csat"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 1000
+      },
+      "record_id": "VARCHAR,$key",
+      "period": "VARCHAR",
+      "date": "DATE",
+      "csat_score": "DECIMAL",
+      "satisfied": "INTEGER",
+      "neutral": "INTEGER",
+      "dissatisfied": "INTEGER",
+      "total_responses": "INTEGER",
+      "survey_id": "VARCHAR",
+      "location_id": "VARCHAR",
+      "segment": "VARCHAR",
+      "trend": "VARCHAR"
+    },
+    "ALERTS": {
+      "$path": ["/reporting/v1/alerts"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 100
+      },
+      "alert_id": "VARCHAR,$key",
+      "alert_name": "VARCHAR",
+      "alert_type": "VARCHAR",
+      "status": "VARCHAR",
+      "created_date": "TIMESTAMP",
+      "triggered_date": "TIMESTAMP",
+      "response_id": "VARCHAR",
+      "survey_id": "VARCHAR",
+      "location_id": "VARCHAR",
+      "assignee[]": {
+        "user_id": "VARCHAR",
+        "name": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "priority": "VARCHAR",
+      "resolution_date": "TIMESTAMP",
+      "notes": "VARCHAR"
+    },
+    "TAGS": {
+      "$path": ["/reporting/v1/tags"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 100
+      },
+      "tag_id": "VARCHAR,$key",
+      "tag_name": "VARCHAR",
+      "tag_category": "VARCHAR",
+      "description": "VARCHAR",
+      "created_date": "TIMESTAMP",
+      "usage_count": "INTEGER",
+      "sentiment": "VARCHAR",
+      "parent_tag_id": "VARCHAR"
+    },
+    "SEGMENTS": {
+      "$path": ["/reporting/v1/segments"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "paging.next",
+        "page_size": 100
+      },
+      "segment_id": "VARCHAR,$key",
+      "segment_name": "VARCHAR",
+      "description": "VARCHAR",
+      "criteria": "VARCHAR",
+      "created_date": "TIMESTAMP",
+      "modified_date": "TIMESTAMP",
+      "created_by": "VARCHAR",
+      "status": "VARCHAR",
+      "member_count": "INTEGER"
+    }
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "$connector_name": "Amazon SP-API Connector",
+  "$connector_label": "Amazon Selling Partner API",
+  "$connector_description": "Connector for Amazon Selling Partner API - provides access to orders, products, inventory, and fulfillment data",
+  "$hostname": "https://sellingpartnerapi-na.amazon.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "ORDERS": {
+      "$path": ["/orders/v0/orders"],
+      "$data_path": "payload.Orders",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "payload.NextToken"
+      },
+      "AmazonOrderId": "VARCHAR,$key",
+      "SellerOrderId": "VARCHAR",
+      "PurchaseDate": "TIMESTAMP",
+      "LastUpdateDate": "TIMESTAMP",
+      "OrderStatus": "VARCHAR",
+      "FulfillmentChannel": "VARCHAR",
+      "SalesChannel": "VARCHAR",
+      "OrderChannel": "VARCHAR",
+      "ShipServiceLevel": "VARCHAR",
+      "OrderTotal[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "NumberOfItemsShipped": "INTEGER",
+      "NumberOfItemsUnshipped": "INTEGER",
+      "PaymentExecutionDetail": "VARCHAR",
+      "PaymentMethod": "VARCHAR",
+      "PaymentMethodDetails": "VARCHAR",
+      "MarketplaceId": "VARCHAR",
+      "ShipmentServiceLevelCategory": "VARCHAR",
+      "EasyShipShipmentStatus": "VARCHAR",
+      "CbaDisplayableShippingLabel": "VARCHAR",
+      "OrderType": "VARCHAR",
+      "EarliestShipDate": "TIMESTAMP",
+      "LatestShipDate": "TIMESTAMP",
+      "EarliestDeliveryDate": "TIMESTAMP",
+      "LatestDeliveryDate": "TIMESTAMP",
+      "IsBusinessOrder": "BOOLEAN",
+      "IsPrime": "BOOLEAN",
+      "IsPremiumOrder": "BOOLEAN",
+      "IsGlobalExpressEnabled": "BOOLEAN",
+      "ReplacedOrderId": "VARCHAR",
+      "IsReplacementOrder": "BOOLEAN",
+      "PromiseResponseDueDate": "TIMESTAMP",
+      "IsEstimatedShipDateSet": "BOOLEAN",
+      "IsSoldByAB": "BOOLEAN",
+      "IsIBA": "BOOLEAN",
+      "DefaultShipFromLocationAddress": "VARCHAR",
+      "BuyerInvoicePreference": "VARCHAR",
+      "BuyerTaxInformation": "VARCHAR",
+      "FulfillmentInstruction": "VARCHAR",
+      "IsISPU": "BOOLEAN",
+      "IsAccessPointOrder": "BOOLEAN",
+      "MarketplaceTaxInfo": "VARCHAR",
+      "SellerDisplayName": "VARCHAR",
+      "ShippingAddress[]": {
+        "Name": "VARCHAR",
+        "AddressLine1": "VARCHAR",
+        "AddressLine2": "VARCHAR",
+        "AddressLine3": "VARCHAR",
+        "City": "VARCHAR",
+        "County": "VARCHAR",
+        "District": "VARCHAR",
+        "StateOrRegion": "VARCHAR",
+        "Municipality": "VARCHAR",
+        "PostalCode": "VARCHAR",
+        "CountryCode": "VARCHAR",
+        "Phone": "VARCHAR",
+        "AddressType": "VARCHAR"
+      },
+      "BuyerInfo[]": {
+        "BuyerEmail": "VARCHAR",
+        "BuyerName": "VARCHAR",
+        "BuyerCounty": "VARCHAR",
+        "BuyerTaxInfo": "VARCHAR",
+        "PurchaseOrderNumber": "VARCHAR"
+      },
+      "AutomatedShippingSettings": "VARCHAR",
+      "HasRegulatedItems": "BOOLEAN",
+      "ElectronicInvoiceStatus": "VARCHAR"
+    },
+    "ORDER_ITEMS": {
+      "$path": ["/orders/v0/orders/{orderId}/orderItems"],
+      "$data_path": "payload.OrderItems",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "payload.NextToken"
+      },
+      "ASIN": "VARCHAR",
+      "SellerSKU": "VARCHAR",
+      "OrderItemId": "VARCHAR,$key",
+      "Title": "VARCHAR",
+      "QuantityOrdered": "INTEGER",
+      "QuantityShipped": "INTEGER",
+      "ProductInfo": "VARCHAR",
+      "PointsGranted": "VARCHAR",
+      "ItemPrice[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "ShippingPrice[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "ItemTax[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "ShippingTax[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "ShippingDiscount[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "ShippingDiscountTax[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "PromotionDiscount[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "PromotionDiscountTax[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "PromotionIds": "VARCHAR",
+      "CODFee[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "CODFeeDiscount[]": {
+        "CurrencyCode": "VARCHAR",
+        "Amount": "DECIMAL"
+      },
+      "IsGift": "BOOLEAN",
+      "ConditionNote": "VARCHAR",
+      "ConditionId": "VARCHAR",
+      "ConditionSubtypeId": "VARCHAR",
+      "ScheduledDeliveryStartDate": "TIMESTAMP",
+      "ScheduledDeliveryEndDate": "TIMESTAMP",
+      "PriceDesignation": "VARCHAR",
+      "TaxCollection": "VARCHAR",
+      "SerialNumberRequired": "BOOLEAN",
+      "IsTransparency": "BOOLEAN",
+      "IossNumber": "VARCHAR",
+      "StoreChainStoreId": "VARCHAR",
+      "DeemedResellerCategory": "VARCHAR",
+      "BuyerInfo": "VARCHAR",
+      "BuyerRequestedCancel": "VARCHAR"
+    },
+    "CATALOG_ITEMS": {
+      "$path": ["/catalog/2022-04-01/items/{asin}"],
+      "asin": "VARCHAR,$key",
+      "attributes": "VARCHAR",
+      "identifiers": "VARCHAR",
+      "images": "VARCHAR",
+      "productTypes": "VARCHAR",
+      "salesRanks": "VARCHAR",
+      "summaries": "VARCHAR",
+      "variations": "VARCHAR",
+      "vendorDetails": "VARCHAR"
+    },
+    "INVENTORY_SUMMARIES": {
+      "$path": ["/fba/inventory/v1/summaries"],
+      "$data_path": "payload.inventorySummaries",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "pagination.nextToken"
+      },
+      "asin": "VARCHAR",
+      "fnSku": "VARCHAR,$key",
+      "sellerSku": "VARCHAR",
+      "condition": "VARCHAR",
+      "inventoryDetails[]": {
+        "fulfillableQuantity": "INTEGER",
+        "inboundWorkingQuantity": "INTEGER",
+        "inboundShippedQuantity": "INTEGER",
+        "inboundReceivingQuantity": "INTEGER",
+        "reservedQuantity": "VARCHAR",
+        "researchingQuantity": "VARCHAR",
+        "unfulfillableQuantity": "VARCHAR"
+      },
+      "lastUpdatedTime": "TIMESTAMP",
+      "productName": "VARCHAR",
+      "totalQuantity": "INTEGER"
+    },
+    "INBOUND_SHIPMENTS": {
+      "$path": ["/fba/inbound/v0/shipments"],
+      "$data_path": "payload.ShipmentData",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "payload.NextToken"
+      },
+      "ShipmentId": "VARCHAR,$key",
+      "ShipmentName": "VARCHAR",
+      "ShipFromAddress[]": {
+        "Name": "VARCHAR",
+        "AddressLine1": "VARCHAR",
+        "AddressLine2": "VARCHAR",
+        "City": "VARCHAR",
+        "DistrictOrCounty": "VARCHAR",
+        "StateOrProvinceCode": "VARCHAR",
+        "CountryCode": "VARCHAR",
+        "PostalCode": "VARCHAR"
+      },
+      "DestinationFulfillmentCenterId": "VARCHAR",
+      "ShipmentStatus": "VARCHAR",
+      "LabelPrepType": "VARCHAR",
+      "AreCasesRequired": "BOOLEAN",
+      "ConfirmedNeedByDate": "DATE",
+      "BoxContentsSource": "VARCHAR",
+      "EstimatedBoxContentsFee": "VARCHAR"
+    },
+    "SHIPMENT_ITEMS": {
+      "$path": ["/fba/inbound/v0/shipments/{shipmentId}/items"],
+      "$data_path": "payload.ItemData",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "payload.NextToken"
+      },
+      "ShipmentId": "VARCHAR",
+      "SellerSKU": "VARCHAR,$key",
+      "FulfillmentNetworkSKU": "VARCHAR",
+      "QuantityShipped": "INTEGER",
+      "QuantityReceived": "INTEGER",
+      "QuantityInCase": "INTEGER",
+      "ReleaseDate": "DATE",
+      "PrepDetailsList": "VARCHAR"
+    },
+    "FULFILLMENT_ORDERS": {
+      "$path": ["/fba/outbound/2020-07-01/fulfillmentOrders/{sellerFulfillmentOrderId}"],
+      "sellerFulfillmentOrderId": "VARCHAR,$key",
+      "marketplaceId": "VARCHAR",
+      "displayableOrderId": "VARCHAR",
+      "displayableOrderDate": "TIMESTAMP",
+      "displayableOrderComment": "VARCHAR",
+      "shippingSpeedCategory": "VARCHAR",
+      "deliveryWindow": "VARCHAR",
+      "destinationAddress[]": {
+        "name": "VARCHAR",
+        "addressLine1": "VARCHAR",
+        "addressLine2": "VARCHAR",
+        "addressLine3": "VARCHAR",
+        "city": "VARCHAR",
+        "districtOrCounty": "VARCHAR",
+        "stateOrRegion": "VARCHAR",
+        "postalCode": "VARCHAR",
+        "countryCode": "VARCHAR",
+        "phone": "VARCHAR"
+      },
+      "fulfillmentAction": "VARCHAR",
+      "fulfillmentPolicy": "VARCHAR",
+      "codSettings": "VARCHAR",
+      "receivedDate": "TIMESTAMP",
+      "fulfillmentOrderStatus": "VARCHAR",
+      "statusUpdatedDate": "TIMESTAMP",
+      "notificationEmails": "VARCHAR",
+      "featureConstraints": "VARCHAR"
+    }
+  }
+}

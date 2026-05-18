@@ -1,0 +1,103 @@
+{
+  "$connector_name": "Microsoft Planner API Connector",
+  "$connector_label": "Microsoft Planner",
+  "$connector_description": "Connector for Microsoft Planner via Microsoft Graph API - provides access to plans, tasks, buckets, and plan details",
+  "$hostname": "https://graph.microsoft.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "PLANS": {
+      "$path": ["/v1.0/planner/plans"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink"
+      },
+      "id": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "owner": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "createdBy[]": {
+        "user[]": {
+          "id": "VARCHAR"
+        }
+      },
+      "container[]": {
+        "containerId": "VARCHAR",
+        "type": "VARCHAR",
+        "url": "VARCHAR"
+      }
+    },
+    "TASKS": {
+      "$path": ["/v1.0/planner/tasks"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink"
+      },
+      "id": "VARCHAR,$key",
+      "planId": "VARCHAR",
+      "bucketId": "VARCHAR",
+      "title": "VARCHAR",
+      "orderHint": "VARCHAR",
+      "assigneePriority": "VARCHAR",
+      "percentComplete": "INTEGER",
+      "startDateTime": "TIMESTAMP",
+      "createdDateTime": "TIMESTAMP",
+      "dueDateTime": "TIMESTAMP",
+      "hasDescription": "BOOLEAN",
+      "previewType": "VARCHAR",
+      "completedDateTime": "TIMESTAMP",
+      "completedBy[]": {
+        "user[]": {
+          "id": "VARCHAR"
+        }
+      },
+      "referenceCount": "INTEGER",
+      "checklistItemCount": "INTEGER",
+      "activeChecklistItemCount": "INTEGER",
+      "conversationThreadId": "VARCHAR",
+      "priority": "INTEGER",
+      "createdBy[]": {
+        "user[]": {
+          "id": "VARCHAR"
+        }
+      },
+      "appliedCategories": "VARCHAR",
+      "assignments": "VARCHAR"
+    },
+    "BUCKETS": {
+      "$path": ["/v1.0/planner/buckets"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink"
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "planId": "VARCHAR",
+      "orderHint": "VARCHAR"
+    },
+    "PLAN_DETAILS": {
+      "$path": ["/v1.0/planner/plans/{planId}/details"],
+      "id": "VARCHAR,$key",
+      "sharedWith": "VARCHAR",
+      "categoryDescriptions[]": {
+        "category1": "VARCHAR",
+        "category2": "VARCHAR",
+        "category3": "VARCHAR",
+        "category4": "VARCHAR",
+        "category5": "VARCHAR",
+        "category6": "VARCHAR"
+      },
+      "contextDetails": "VARCHAR"
+    },
+    "TASK_DETAILS": {
+      "$path": ["/v1.0/planner/tasks/{taskId}/details"],
+      "id": "VARCHAR,$key",
+      "description": "VARCHAR",
+      "previewType": "VARCHAR",
+      "references": "VARCHAR",
+      "checklist": "VARCHAR"
+    }
+  }
+}

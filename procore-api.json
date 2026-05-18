@@ -1,0 +1,344 @@
+{
+  "$connector_name": "Procore API Connector",
+  "$connector_label": "Procore Construction Management",
+  "$connector_description": "Connector for Procore API - provides access to projects, companies, users, RFIs, submittals, drawings, documents, and construction management data",
+  "$hostname": "https://api.procore.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "COMPANIES": {
+      "$path": ["/rest/v1.0/companies"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "is_active": "BOOLEAN",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "PROJECTS": {
+      "$path": ["/rest/v1.0/projects"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "display_name": "VARCHAR",
+      "project_number": "VARCHAR",
+      "address": "VARCHAR",
+      "city": "VARCHAR",
+      "state_code": "VARCHAR",
+      "country_code": "VARCHAR",
+      "zip": "VARCHAR",
+      "county": "VARCHAR",
+      "latitude": "DOUBLE",
+      "longitude": "DOUBLE",
+      "stage": "VARCHAR",
+      "phone": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "active": "BOOLEAN",
+      "origin_id": "INTEGER",
+      "origin_data": "VARCHAR",
+      "company[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "owners": "VARCHAR",
+      "time_zone": "VARCHAR",
+      "start_date": "DATE",
+      "completion_date": "DATE",
+      "total_value": "DECIMAL",
+      "project_type": "VARCHAR",
+      "delivery_method": "VARCHAR"
+    },
+    "USERS": {
+      "$path": ["/rest/v1.0/companies/{company_id}/users"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "login": "VARCHAR",
+      "name": "VARCHAR",
+      "email_address": "VARCHAR",
+      "is_employee": "BOOLEAN",
+      "job_title": "VARCHAR",
+      "business_phone": "VARCHAR",
+      "mobile_phone": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "is_active": "BOOLEAN",
+      "vendor[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR",
+        "company": "VARCHAR"
+      }
+    },
+    "RFIS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/rfis"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "number": "INTEGER",
+      "subject": "VARCHAR",
+      "status": "VARCHAR",
+      "due_date": "DATE",
+      "received_date": "DATE",
+      "date_closed": "DATE",
+      "question": "VARCHAR",
+      "answer": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "assignee[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "responsible_contractor[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "created_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "cost_impact": "VARCHAR",
+      "schedule_impact": "VARCHAR",
+      "private": "BOOLEAN",
+      "attachments": "VARCHAR",
+      "drawing_number": "VARCHAR",
+      "specification_section": "VARCHAR"
+    },
+    "SUBMITTALS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/submittals"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "number": "VARCHAR",
+      "title": "VARCHAR",
+      "status": "VARCHAR",
+      "type": "VARCHAR",
+      "spec_section": "VARCHAR",
+      "due_date": "DATE",
+      "received_date": "DATE",
+      "date_closed": "DATE",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "responsible_contractor[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "approver[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "created_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "description": "VARCHAR",
+      "private": "BOOLEAN",
+      "attachments": "VARCHAR",
+      "ball_in_court[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      }
+    },
+    "DRAWINGS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/drawings"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "number": "VARCHAR",
+      "title": "VARCHAR",
+      "revision": "VARCHAR",
+      "current": "BOOLEAN",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "drawing_date": "DATE",
+      "discipline": "VARCHAR",
+      "drawing_set[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "uploaded_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "private": "BOOLEAN",
+      "url": "VARCHAR"
+    },
+    "DOCUMENTS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/documents"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "is_deleted": "BOOLEAN",
+      "is_tracked": "BOOLEAN",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "folder[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "uploaded_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "private": "BOOLEAN",
+      "url": "VARCHAR",
+      "file_size": "INTEGER"
+    },
+    "CHANGE_ORDERS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/change_orders"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "number": "INTEGER",
+      "title": "VARCHAR",
+      "status": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "executed_date": "DATE",
+      "approved_date": "DATE",
+      "description": "VARCHAR",
+      "origin_id": "INTEGER",
+      "origin_data": "VARCHAR",
+      "created_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "contract[]": {
+        "id": "INTEGER",
+        "title": "VARCHAR"
+      },
+      "change_order_packages": "VARCHAR",
+      "private": "BOOLEAN"
+    },
+    "PUNCH_ITEMS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/punch_items"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "number": "INTEGER",
+      "title": "VARCHAR",
+      "status": "VARCHAR",
+      "description": "VARCHAR",
+      "due_date": "DATE",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "assignee[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "responsible_contractor[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "created_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "location[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "trade": "VARCHAR",
+      "cost_code": "VARCHAR",
+      "private": "BOOLEAN",
+      "attachments": "VARCHAR"
+    },
+    "MEETINGS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/meetings"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "title": "VARCHAR",
+      "meeting_date": "TIMESTAMP",
+      "location": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "created_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "meeting_type": "VARCHAR",
+      "private": "BOOLEAN",
+      "attendees": "VARCHAR",
+      "categories": "VARCHAR"
+    },
+    "DAILY_LOGS": {
+      "$path": ["/rest/v1.0/projects/{project_id}/daily_logs"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "INTEGER,$key",
+      "log_date": "DATE",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "created_by[]": {
+        "id": "INTEGER",
+        "name": "VARCHAR"
+      },
+      "weather[]": {
+        "temperature_high": "INTEGER",
+        "temperature_low": "INTEGER",
+        "conditions": "VARCHAR"
+      },
+      "notes": "VARCHAR",
+      "private": "BOOLEAN"
+    }
+  }
+}

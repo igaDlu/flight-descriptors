@@ -1,0 +1,247 @@
+{
+  "$connector_name": "Miro API Connector",
+  "$connector_label": "Miro API",
+  "$connector_description": "Connector for Miro REST API - provides access to boards, items, users, and teams",
+  "$hostname": "https://api.miro.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "BOARDS": {
+      "$path": ["/v2/boards/{board_id}"],
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "viewLink": "VARCHAR",
+      "sharingPolicy[]": {
+        "access": "VARCHAR",
+        "inviteToAccountAndBoardLinkAccess": "VARCHAR",
+        "organizationAccess": "VARCHAR",
+        "teamAccess": "VARCHAR"
+      },
+      "picture": "VARCHAR",
+      "createdAt": "TIMESTAMP",
+      "createdBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "currentUserMembership[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR",
+        "role": "VARCHAR"
+      },
+      "modifiedAt": "TIMESTAMP",
+      "modifiedBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "owner[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "permissionsPolicy[]": {
+        "collaborationToolsStartAccess": "VARCHAR",
+        "copyAccess": "VARCHAR",
+        "copyAccessLevel": "VARCHAR",
+        "sharingAccess": "VARCHAR"
+      },
+      "policy[]": {
+        "permissionsPolicy": "VARCHAR",
+        "sharingPolicy": "VARCHAR"
+      },
+      "team[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "currentUserConnection[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "role": "VARCHAR"
+      }
+    },
+    "BOARD_ITEMS": {
+      "$path": ["/v2/boards/{board_id}/items"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "cursor",
+        "page_size": 50
+      },
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "data": "VARCHAR",
+      "style": "VARCHAR",
+      "geometry[]": {
+        "width": "DOUBLE",
+        "height": "DOUBLE",
+        "rotation": "DOUBLE"
+      },
+      "position[]": {
+        "x": "DOUBLE",
+        "y": "DOUBLE",
+        "origin": "VARCHAR",
+        "relativeTo": "VARCHAR"
+      },
+      "createdAt": "TIMESTAMP",
+      "createdBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "modifiedAt": "TIMESTAMP",
+      "modifiedBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "parent": "VARCHAR",
+      "links[]": {
+        "self": "VARCHAR",
+        "related": "VARCHAR"
+      }
+    },
+    "STICKY_NOTES": {
+      "$path": ["/v2/boards/{board_id}/sticky_notes/{item_id}"],
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "data[]": {
+        "content": "VARCHAR",
+        "shape": "VARCHAR"
+      },
+      "style[]": {
+        "fillColor": "VARCHAR",
+        "textAlign": "VARCHAR",
+        "textAlignVertical": "VARCHAR"
+      },
+      "geometry[]": {
+        "width": "DOUBLE",
+        "height": "DOUBLE",
+        "rotation": "DOUBLE"
+      },
+      "position[]": {
+        "x": "DOUBLE",
+        "y": "DOUBLE",
+        "origin": "VARCHAR",
+        "relativeTo": "VARCHAR"
+      },
+      "createdAt": "TIMESTAMP",
+      "createdBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "modifiedAt": "TIMESTAMP",
+      "modifiedBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "parent": "VARCHAR",
+      "links[]": {
+        "self": "VARCHAR"
+      }
+    },
+    "SHAPES": {
+      "$path": ["/v2/boards/{board_id}/shapes/{item_id}"],
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "data[]": {
+        "content": "VARCHAR",
+        "shape": "VARCHAR"
+      },
+      "style[]": {
+        "fillColor": "VARCHAR",
+        "fillOpacity": "VARCHAR",
+        "fontFamily": "VARCHAR",
+        "fontSize": "VARCHAR",
+        "borderColor": "VARCHAR",
+        "borderWidth": "VARCHAR",
+        "borderOpacity": "VARCHAR",
+        "borderStyle": "VARCHAR",
+        "textAlign": "VARCHAR",
+        "textAlignVertical": "VARCHAR",
+        "color": "VARCHAR"
+      },
+      "geometry[]": {
+        "width": "DOUBLE",
+        "height": "DOUBLE",
+        "rotation": "DOUBLE"
+      },
+      "position[]": {
+        "x": "DOUBLE",
+        "y": "DOUBLE",
+        "origin": "VARCHAR",
+        "relativeTo": "VARCHAR"
+      },
+      "createdAt": "TIMESTAMP",
+      "createdBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "modifiedAt": "TIMESTAMP",
+      "modifiedBy[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "parent": "VARCHAR",
+      "links[]": {
+        "self": "VARCHAR"
+      }
+    },
+    "USERS": {
+      "$path": ["/v2/users/me"],
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "email": "VARCHAR",
+      "picture": "VARCHAR",
+      "state": "VARCHAR",
+      "createdAt": "TIMESTAMP",
+      "isLicensed": "BOOLEAN",
+      "industry": "VARCHAR",
+      "companySize": "VARCHAR",
+      "role": "VARCHAR",
+      "country": "VARCHAR"
+    },
+    "TEAMS": {
+      "$path": ["/v2/teams/{team_id}"],
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "picture": "VARCHAR",
+      "createdAt": "TIMESTAMP",
+      "modifiedAt": "TIMESTAMP",
+      "organization[]": {
+        "id": "VARCHAR",
+        "type": "VARCHAR",
+        "name": "VARCHAR"
+      }
+    },
+    "TEAM_MEMBERS": {
+      "$path": ["/v2/teams/{team_id}/members"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "cursor",
+        "next_cursor_path": "cursor",
+        "page_size": 20
+      },
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "email": "VARCHAR",
+      "picture": "VARCHAR",
+      "state": "VARCHAR",
+      "role": "VARCHAR",
+      "createdAt": "TIMESTAMP",
+      "isLicensed": "BOOLEAN"
+    }
+  }
+}

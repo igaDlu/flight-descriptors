@@ -1,0 +1,217 @@
+{
+  "$connector_name": "Notion API Connector",
+  "$connector_label": "Notion API",
+  "$connector_description": "Connector for Notion API - provides access to databases, pages, blocks, users, and comments",
+  "$hostname": "https://api.notion.com",
+  "$authentication": "api_key",
+  "$tables": {
+    "DATABASES": {
+      "$path": ["/v1/search"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "start_cursor",
+        "next_cursor_path": "next_cursor",
+        "page_size": 100
+      },
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "created_time": "TIMESTAMP",
+      "created_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "last_edited_time": "TIMESTAMP",
+      "last_edited_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "icon": "VARCHAR",
+      "cover": "VARCHAR",
+      "properties": "VARCHAR",
+      "parent": "VARCHAR",
+      "url": "VARCHAR",
+      "archived": "BOOLEAN",
+      "is_inline": "BOOLEAN",
+      "public_url": "VARCHAR"
+    },
+    "DATABASE_QUERY": {
+      "$path": ["/v1/databases/{database_id}/query"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "start_cursor",
+        "next_cursor_path": "next_cursor",
+        "page_size": 100
+      },
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "created_time": "TIMESTAMP",
+      "created_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "last_edited_time": "TIMESTAMP",
+      "last_edited_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "cover": "VARCHAR",
+      "icon": "VARCHAR",
+      "parent": "VARCHAR",
+      "archived": "BOOLEAN",
+      "properties": "VARCHAR",
+      "url": "VARCHAR",
+      "public_url": "VARCHAR"
+    },
+    "PAGES": {
+      "$path": ["/v1/pages/{page_id}"],
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "created_time": "TIMESTAMP",
+      "created_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "last_edited_time": "TIMESTAMP",
+      "last_edited_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "cover": "VARCHAR",
+      "icon": "VARCHAR",
+      "parent": "VARCHAR",
+      "archived": "BOOLEAN",
+      "properties": "VARCHAR",
+      "url": "VARCHAR",
+      "public_url": "VARCHAR"
+    },
+    "BLOCKS": {
+      "$path": ["/v1/blocks/{block_id}/children"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "start_cursor",
+        "next_cursor_path": "next_cursor",
+        "page_size": 100
+      },
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "parent": "VARCHAR",
+      "type": "VARCHAR",
+      "created_time": "TIMESTAMP",
+      "created_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "last_edited_time": "TIMESTAMP",
+      "last_edited_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "archived": "BOOLEAN",
+      "has_children": "BOOLEAN",
+      "paragraph": "VARCHAR",
+      "heading_1": "VARCHAR",
+      "heading_2": "VARCHAR",
+      "heading_3": "VARCHAR",
+      "bulleted_list_item": "VARCHAR",
+      "numbered_list_item": "VARCHAR",
+      "to_do": "VARCHAR",
+      "toggle": "VARCHAR",
+      "child_page": "VARCHAR",
+      "child_database": "VARCHAR",
+      "embed": "VARCHAR",
+      "image": "VARCHAR",
+      "video": "VARCHAR",
+      "file": "VARCHAR",
+      "pdf": "VARCHAR",
+      "bookmark": "VARCHAR",
+      "callout": "VARCHAR",
+      "quote": "VARCHAR",
+      "equation": "VARCHAR",
+      "divider": "VARCHAR",
+      "table_of_contents": "VARCHAR",
+      "column": "VARCHAR",
+      "column_list": "VARCHAR",
+      "link_preview": "VARCHAR",
+      "synced_block": "VARCHAR",
+      "template": "VARCHAR",
+      "link_to_page": "VARCHAR",
+      "table": "VARCHAR",
+      "table_row": "VARCHAR",
+      "code": "VARCHAR",
+      "breadcrumb": "VARCHAR"
+    },
+    "USERS": {
+      "$path": ["/v1/users"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "start_cursor",
+        "next_cursor_path": "next_cursor",
+        "page_size": 100
+      },
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "avatar_url": "VARCHAR",
+      "person": "VARCHAR",
+      "bot": "VARCHAR"
+    },
+    "USER_DETAILS": {
+      "$path": ["/v1/users/{user_id}"],
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "avatar_url": "VARCHAR",
+      "person[]": {
+        "email": "VARCHAR"
+      },
+      "bot": "VARCHAR"
+    },
+    "COMMENTS": {
+      "$path": ["/v1/comments"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "start_cursor",
+        "next_cursor_path": "next_cursor",
+        "page_size": 100
+      },
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "parent": "VARCHAR",
+      "discussion_id": "VARCHAR",
+      "created_time": "TIMESTAMP",
+      "created_by[]": {
+        "object": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "last_edited_time": "TIMESTAMP",
+      "rich_text": "VARCHAR"
+    },
+    "SEARCH_RESULTS": {
+      "$path": ["/v1/search"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "start_cursor",
+        "next_cursor_path": "next_cursor",
+        "page_size": 100
+      },
+      "object": "VARCHAR",
+      "id": "VARCHAR,$key",
+      "created_time": "TIMESTAMP",
+      "last_edited_time": "TIMESTAMP",
+      "parent": "VARCHAR",
+      "archived": "BOOLEAN",
+      "url": "VARCHAR",
+      "properties": "VARCHAR"
+    }
+  }
+}

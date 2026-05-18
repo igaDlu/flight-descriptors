@@ -1,0 +1,233 @@
+{
+  "$connector_name": "Databricks API Connector",
+  "$connector_label": "Databricks Workspace",
+  "$connector_description": "Connector for Databricks Workspace API - provides access to clusters, jobs, notebooks, DBFS, secrets, and workspace resources",
+  "$hostname": "https://<databricks-instance>/api/2.0",
+  "$authentication": "api_key",
+  "$tables": {
+    "CLUSTERS": {
+      "$path": ["/clusters/list"],
+      "$data_path": "clusters",
+      "cluster_id": "VARCHAR,$key",
+      "cluster_name": "VARCHAR",
+      "spark_version": "VARCHAR",
+      "node_type_id": "VARCHAR",
+      "driver_node_type_id": "VARCHAR",
+      "num_workers": "INTEGER",
+      "autoscale[]": {
+        "min_workers": "INTEGER",
+        "max_workers": "INTEGER"
+      },
+      "state": "VARCHAR",
+      "state_message": "VARCHAR",
+      "start_time": "BIGINT",
+      "terminated_time": "BIGINT",
+      "last_state_loss_time": "BIGINT",
+      "last_activity_time": "BIGINT",
+      "cluster_memory_mb": "BIGINT",
+      "cluster_cores": "DECIMAL",
+      "default_tags": "VARCHAR",
+      "cluster_source": "VARCHAR",
+      "enable_elastic_disk": "BOOLEAN",
+      "disk_spec[]": {
+        "disk_type": "VARCHAR",
+        "disk_count": "INTEGER",
+        "disk_size": "INTEGER"
+      },
+      "cluster_log_conf": "VARCHAR",
+      "init_scripts": "VARCHAR",
+      "spark_conf": "VARCHAR",
+      "spark_env_vars": "VARCHAR",
+      "custom_tags": "VARCHAR",
+      "ssh_public_keys": "VARCHAR",
+      "instance_pool_id": "VARCHAR"
+    },
+    "CLUSTER_EVENTS": {
+      "$path": ["/clusters/events"],
+      "$data_path": "events",
+      "cluster_id": "VARCHAR",
+      "timestamp": "BIGINT,$key",
+      "type": "VARCHAR",
+      "details": "VARCHAR"
+    },
+    "JOBS": {
+      "$path": ["/jobs/list"],
+      "$data_path": "jobs",
+      "job_id": "INTEGER,$key",
+      "creator_user_name": "VARCHAR",
+      "settings[]": {
+        "name": "VARCHAR",
+        "new_cluster": "VARCHAR",
+        "existing_cluster_id": "VARCHAR",
+        "notebook_task": "VARCHAR",
+        "spark_jar_task": "VARCHAR",
+        "spark_python_task": "VARCHAR",
+        "spark_submit_task": "VARCHAR",
+        "timeout_seconds": "INTEGER",
+        "max_retries": "INTEGER",
+        "min_retry_interval_millis": "INTEGER",
+        "retry_on_timeout": "BOOLEAN",
+        "schedule": "VARCHAR",
+        "max_concurrent_runs": "INTEGER"
+      },
+      "created_time": "BIGINT"
+    },
+    "JOB_RUNS": {
+      "$path": ["/jobs/runs/list"],
+      "$data_path": "runs",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "run_id": "INTEGER,$key",
+      "job_id": "INTEGER",
+      "run_name": "VARCHAR",
+      "run_page_url": "VARCHAR",
+      "run_type": "VARCHAR",
+      "state[]": {
+        "life_cycle_state": "VARCHAR",
+        "state_message": "VARCHAR",
+        "result_state": "VARCHAR"
+      },
+      "task": "VARCHAR",
+      "cluster_spec": "VARCHAR",
+      "cluster_instance[]": {
+        "cluster_id": "VARCHAR",
+        "spark_context_id": "VARCHAR"
+      },
+      "overriding_parameters": "VARCHAR",
+      "start_time": "BIGINT",
+      "setup_duration": "BIGINT",
+      "execution_duration": "BIGINT",
+      "cleanup_duration": "BIGINT",
+      "end_time": "BIGINT",
+      "trigger": "VARCHAR",
+      "creator_user_name": "VARCHAR",
+      "run_duration": "BIGINT"
+    },
+    "WORKSPACE_OBJECTS": {
+      "$path": ["/workspace/list"],
+      "$data_path": "objects",
+      "path": "VARCHAR,$key",
+      "object_type": "VARCHAR",
+      "object_id": "BIGINT",
+      "language": "VARCHAR",
+      "created_at": "BIGINT",
+      "modified_at": "BIGINT"
+    },
+    "DBFS_FILES": {
+      "$path": ["/dbfs/list"],
+      "$data_path": "files",
+      "path": "VARCHAR,$key",
+      "is_dir": "BOOLEAN",
+      "file_size": "BIGINT",
+      "modification_time": "BIGINT"
+    },
+    "SECRET_SCOPES": {
+      "$path": ["/secrets/scopes/list"],
+      "$data_path": "scopes",
+      "name": "VARCHAR,$key",
+      "backend_type": "VARCHAR"
+    },
+    "SECRET_KEYS": {
+      "$path": ["/secrets/list"],
+      "$data_path": "secrets",
+      "key": "VARCHAR,$key",
+      "last_updated_timestamp": "BIGINT"
+    },
+    "INSTANCE_POOLS": {
+      "$path": ["/instance-pools/list"],
+      "$data_path": "instance_pools",
+      "instance_pool_id": "VARCHAR,$key",
+      "instance_pool_name": "VARCHAR",
+      "node_type_id": "VARCHAR",
+      "idle_instance_autotermination_minutes": "INTEGER",
+      "enable_elastic_disk": "BOOLEAN",
+      "disk_spec[]": {
+        "disk_type": "VARCHAR",
+        "disk_count": "INTEGER",
+        "disk_size": "INTEGER"
+      },
+      "preloaded_spark_versions": "VARCHAR",
+      "custom_tags": "VARCHAR",
+      "state": "VARCHAR",
+      "stats[]": {
+        "used_count": "INTEGER",
+        "idle_count": "INTEGER",
+        "pending_used_count": "INTEGER",
+        "pending_idle_count": "INTEGER"
+      },
+      "default_tags": "VARCHAR"
+    },
+    "LIBRARIES": {
+      "$path": ["/libraries/all-cluster-statuses"],
+      "$data_path": "statuses",
+      "cluster_id": "VARCHAR,$key",
+      "library_statuses": "VARCHAR"
+    },
+    "TOKENS": {
+      "$path": ["/token/list"],
+      "$data_path": "token_infos",
+      "token_id": "VARCHAR,$key",
+      "creation_time": "BIGINT",
+      "expiry_time": "BIGINT",
+      "comment": "VARCHAR"
+    },
+    "PERMISSIONS": {
+      "$path": ["/permissions/clusters/{cluster_id}"],
+      "object_id": "VARCHAR,$key",
+      "object_type": "VARCHAR",
+      "access_control_list": "VARCHAR"
+    },
+    "GLOBAL_INIT_SCRIPTS": {
+      "$path": ["/global-init-scripts"],
+      "$data_path": "scripts",
+      "script_id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "position": "INTEGER",
+      "enabled": "BOOLEAN",
+      "creator_user_name": "VARCHAR",
+      "created_at": "BIGINT",
+      "updated_at": "BIGINT"
+    },
+    "REPOS": {
+      "$path": ["/repos"],
+      "$data_path": "repos",
+      "id": "INTEGER,$key",
+      "path": "VARCHAR",
+      "url": "VARCHAR",
+      "provider": "VARCHAR",
+      "branch": "VARCHAR",
+      "head_commit_id": "VARCHAR"
+    },
+    "WAREHOUSES": {
+      "$path": ["/sql/warehouses"],
+      "$data_path": "warehouses",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "cluster_size": "VARCHAR",
+      "min_num_clusters": "INTEGER",
+      "max_num_clusters": "INTEGER",
+      "auto_stop_mins": "INTEGER",
+      "auto_resume": "BOOLEAN",
+      "creator_name": "VARCHAR",
+      "state": "VARCHAR",
+      "jdbc_url": "VARCHAR",
+      "odbc_params[]": {
+        "hostname": "VARCHAR",
+        "port": "INTEGER",
+        "path": "VARCHAR"
+      },
+      "tags": "VARCHAR",
+      "spot_instance_policy": "VARCHAR",
+      "enable_photon": "BOOLEAN",
+      "enable_serverless_compute": "BOOLEAN",
+      "warehouse_type": "VARCHAR",
+      "num_clusters": "INTEGER",
+      "num_active_sessions": "INTEGER"
+    }
+  }
+}

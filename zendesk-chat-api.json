@@ -1,0 +1,203 @@
+{
+  "$connector_name": "Zendesk Chat API Connector",
+  "$connector_label": "Zendesk Chat",
+  "$connector_description": "Connector for Zendesk Real-Time Chat API - provides access to agents, chats, visitors, departments, triggers, and chat analytics",
+  "$hostname": "https://www.zopim.com/api/v2",
+  "$authentication": "oauth2",
+  "$tables": {
+    "AGENTS": {
+      "$path": ["/agents"],
+      "id": "VARCHAR,$key",
+      "display_name": "VARCHAR",
+      "first_name": "VARCHAR",
+      "last_name": "VARCHAR",
+      "email": "VARCHAR",
+      "role": "VARCHAR",
+      "enabled": "BOOLEAN",
+      "departments": "VARCHAR",
+      "skills": "VARCHAR",
+      "groups": "VARCHAR",
+      "create_date": "TIMESTAMP",
+      "last_login": "TIMESTAMP"
+    },
+    "CHATS": {
+      "$path": ["/chats"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "session_id": "VARCHAR",
+      "timestamp": "TIMESTAMP",
+      "count": "INTEGER",
+      "duration": "INTEGER",
+      "response_time[]": {
+        "first": "INTEGER",
+        "avg": "INTEGER",
+        "max": "INTEGER"
+      },
+      "agent_ids": "VARCHAR",
+      "agent_names": "VARCHAR",
+      "department_id": "VARCHAR",
+      "department_name": "VARCHAR",
+      "visitor_id": "VARCHAR",
+      "visitor_name": "VARCHAR",
+      "started_by": "VARCHAR",
+      "ended_by": "VARCHAR",
+      "rating": "VARCHAR",
+      "comment": "VARCHAR",
+      "tags": "VARCHAR",
+      "triggered": "BOOLEAN",
+      "triggered_response": "BOOLEAN",
+      "unread": "BOOLEAN",
+      "missed": "BOOLEAN",
+      "history": "VARCHAR",
+      "webpath": "VARCHAR",
+      "zendesk_ticket_id": "VARCHAR"
+    },
+    "VISITORS": {
+      "$path": ["/visitors"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "email": "VARCHAR",
+      "phone": "VARCHAR",
+      "notes": "VARCHAR",
+      "city": "VARCHAR",
+      "region": "VARCHAR",
+      "country": "VARCHAR",
+      "country_code": "VARCHAR",
+      "organization": "VARCHAR",
+      "ip_address": "VARCHAR",
+      "user_agent": "VARCHAR",
+      "visits": "INTEGER",
+      "first_visit": "TIMESTAMP",
+      "last_visit": "TIMESTAMP",
+      "page_title": "VARCHAR",
+      "referrer": "VARCHAR",
+      "status": "VARCHAR",
+      "banned": "BOOLEAN"
+    },
+    "DEPARTMENTS": {
+      "$path": ["/departments"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "enabled": "BOOLEAN",
+      "members": "VARCHAR",
+      "settings[]": {
+        "theme": "VARCHAR",
+        "logo": "VARCHAR"
+      }
+    },
+    "TRIGGERS": {
+      "$path": ["/triggers"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "enabled": "BOOLEAN",
+      "definition[]": {
+        "condition[]": {
+          "type": "VARCHAR",
+          "value": "VARCHAR",
+          "operator": "VARCHAR"
+        },
+        "action[]": {
+          "type": "VARCHAR",
+          "value": "VARCHAR"
+        }
+      }
+    },
+    "BANS": {
+      "$path": ["/bans"],
+      "id": "VARCHAR,$key",
+      "visitor_id": "VARCHAR",
+      "visitor_name": "VARCHAR",
+      "ip_address": "VARCHAR",
+      "type": "VARCHAR",
+      "reason": "VARCHAR",
+      "created_by": "VARCHAR",
+      "created_at": "TIMESTAMP"
+    },
+    "SHORTCUTS": {
+      "$path": ["/shortcuts"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "message": "VARCHAR",
+      "tags": "VARCHAR",
+      "enabled": "BOOLEAN",
+      "agent_ids": "VARCHAR",
+      "department_ids": "VARCHAR"
+    },
+    "GOALS": {
+      "$path": ["/goals"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "enabled": "BOOLEAN",
+      "attribution[]": {
+        "type": "VARCHAR",
+        "value": "VARCHAR"
+      },
+      "settings[]": {
+        "url_match": "VARCHAR",
+        "event_name": "VARCHAR"
+      }
+    },
+    "ACCOUNT": {
+      "$path": ["/account"],
+      "account_key": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "create_date": "TIMESTAMP",
+      "billing[]": {
+        "plan": "VARCHAR",
+        "cycle": "VARCHAR"
+      },
+      "settings[]": {
+        "widget[]": {
+          "color[]": {
+            "primary": "VARCHAR",
+            "secondary": "VARCHAR"
+          },
+          "position": "VARCHAR",
+          "offset[]": {
+            "horizontal": "INTEGER",
+            "vertical": "INTEGER"
+          }
+        },
+        "language": "VARCHAR",
+        "sound_notification": "BOOLEAN",
+        "analytics_enabled": "BOOLEAN"
+      }
+    },
+    "AGENT_TIMELINE": {
+      "$path": ["/agents/{agent_id}/timeline"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "ROWID": "VARCHAR,$key",
+      "timestamp": "TIMESTAMP",
+      "type": "VARCHAR",
+      "agent_id": "VARCHAR",
+      "agent_name": "VARCHAR",
+      "chat_id": "VARCHAR",
+      "visitor_id": "VARCHAR",
+      "department_id": "VARCHAR",
+      "duration": "INTEGER"
+    }
+  }
+}

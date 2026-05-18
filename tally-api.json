@@ -1,0 +1,143 @@
+{
+  "$connector_name": "Tally API Connector",
+  "$connector_label": "Tally Forms",
+  "$connector_description": "Connector for Tally Forms API - provides access to forms, form responses, and submission data",
+  "$hostname": "https://api.tally.so",
+  "$authentication": "api_key",
+  "$tables": {
+    "FORMS": {
+      "$path": ["/forms"],
+      "$data_path": "data",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "status": "VARCHAR",
+      "url": "VARCHAR",
+      "published_at": "TIMESTAMP",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "settings[]": {
+        "allow_multiple_submissions": "BOOLEAN",
+        "show_progress_bar": "BOOLEAN",
+        "show_time_to_complete": "BOOLEAN",
+        "show_question_numbers": "BOOLEAN",
+        "show_branding": "BOOLEAN",
+        "close_at": "TIMESTAMP",
+        "close_message": "VARCHAR"
+      },
+      "theme[]": {
+        "primary_color": "VARCHAR",
+        "background_color": "VARCHAR",
+        "font": "VARCHAR"
+      },
+      "response_count": "INTEGER",
+      "view_count": "INTEGER"
+    },
+    "FORM_DETAILS": {
+      "$path": ["/forms/{formId}"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "status": "VARCHAR",
+      "url": "VARCHAR",
+      "published_at": "TIMESTAMP",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "settings[]": {
+        "allow_multiple_submissions": "BOOLEAN",
+        "show_progress_bar": "BOOLEAN",
+        "show_time_to_complete": "BOOLEAN",
+        "show_question_numbers": "BOOLEAN",
+        "show_branding": "BOOLEAN",
+        "close_at": "TIMESTAMP",
+        "close_message": "VARCHAR",
+        "redirect_url": "VARCHAR",
+        "submit_button_text": "VARCHAR"
+      },
+      "theme[]": {
+        "primary_color": "VARCHAR",
+        "background_color": "VARCHAR",
+        "font": "VARCHAR",
+        "button_style": "VARCHAR"
+      },
+      "fields": "VARCHAR",
+      "response_count": "INTEGER",
+      "view_count": "INTEGER",
+      "completion_rate": "DECIMAL"
+    },
+    "FORM_RESPONSES": {
+      "$path": ["/forms/{formId}/responses"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "after",
+        "next_cursor_path": "pagination.next",
+        "page_size": 100
+      },
+      "responseId": "VARCHAR,$key",
+      "formId": "VARCHAR",
+      "submittedAt": "TIMESTAMP",
+      "fields": "VARCHAR",
+      "respondentId": "VARCHAR",
+      "calculatedFields": "VARCHAR"
+    },
+    "RESPONSE_DETAILS": {
+      "$path": ["/forms/{formId}/responses/{responseId}"],
+      "responseId": "VARCHAR,$key",
+      "formId": "VARCHAR",
+      "formName": "VARCHAR",
+      "submittedAt": "TIMESTAMP",
+      "fields": "VARCHAR",
+      "respondentId": "VARCHAR",
+      "calculatedFields": "VARCHAR",
+      "metadata[]": {
+        "ip_address": "VARCHAR",
+        "user_agent": "VARCHAR",
+        "referrer": "VARCHAR",
+        "utm_source": "VARCHAR",
+        "utm_medium": "VARCHAR",
+        "utm_campaign": "VARCHAR"
+      }
+    },
+    "WORKSPACES": {
+      "$path": ["/workspaces"],
+      "$data_path": "data",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "members": "VARCHAR",
+      "form_count": "INTEGER"
+    },
+    "WORKSPACE_DETAILS": {
+      "$path": ["/workspaces/{workspaceId}"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "members": "VARCHAR",
+      "settings[]": {
+        "default_theme": "VARCHAR",
+        "branding_enabled": "BOOLEAN"
+      },
+      "form_count": "INTEGER",
+      "total_responses": "INTEGER"
+    },
+    "WORKSPACE_FORMS": {
+      "$path": ["/workspaces/{workspaceId}/forms"],
+      "$data_path": "data",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "title": "VARCHAR",
+      "status": "VARCHAR",
+      "url": "VARCHAR",
+      "workspace_id": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "response_count": "INTEGER"
+    }
+  }
+}

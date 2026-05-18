@@ -1,0 +1,275 @@
+{
+  "$connector_name": "Workable API Connector",
+  "$connector_label": "Workable ATS",
+  "$connector_description": "Connector for Workable Applicant Tracking System API - provides access to jobs, candidates, applications, stages, members, and recruitment analytics",
+  "$hostname": "https://www.workable.com/spi/v3",
+  "$authentication": "api_key",
+  "$tables": {
+    "JOBS": {
+      "$path": ["/jobs"],
+      "$data_path": "jobs",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "full_title": "VARCHAR",
+      "shortcode": "VARCHAR",
+      "code": "VARCHAR",
+      "state": "VARCHAR",
+      "department": "VARCHAR",
+      "department_hierarchy": "VARCHAR",
+      "url": "VARCHAR",
+      "application_url": "VARCHAR",
+      "shortlink": "VARCHAR",
+      "location[]": {
+        "location_str": "VARCHAR",
+        "country": "VARCHAR",
+        "country_code": "VARCHAR",
+        "region": "VARCHAR",
+        "region_code": "VARCHAR",
+        "city": "VARCHAR",
+        "zip_code": "VARCHAR",
+        "telecommuting": "BOOLEAN"
+      },
+      "created_at": "TIMESTAMP",
+      "published_on": "TIMESTAMP",
+      "closed_at": "TIMESTAMP"
+    },
+    "JOB_DETAILS": {
+      "$path": ["/jobs/{shortcode}"],
+      "id": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "full_title": "VARCHAR",
+      "shortcode": "VARCHAR",
+      "code": "VARCHAR",
+      "state": "VARCHAR",
+      "department": "VARCHAR",
+      "department_hierarchy": "VARCHAR",
+      "url": "VARCHAR",
+      "application_url": "VARCHAR",
+      "shortlink": "VARCHAR",
+      "location[]": {
+        "location_str": "VARCHAR",
+        "country": "VARCHAR",
+        "country_code": "VARCHAR",
+        "region": "VARCHAR",
+        "region_code": "VARCHAR",
+        "city": "VARCHAR",
+        "zip_code": "VARCHAR",
+        "telecommuting": "BOOLEAN"
+      },
+      "description": "VARCHAR",
+      "requirements": "VARCHAR",
+      "benefits": "VARCHAR",
+      "employment_type": "VARCHAR",
+      "industry": "VARCHAR",
+      "function": "VARCHAR",
+      "experience": "VARCHAR",
+      "education": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "published_on": "TIMESTAMP",
+      "closed_at": "TIMESTAMP",
+      "salary[]": {
+        "min": "DECIMAL",
+        "max": "DECIMAL",
+        "currency": "VARCHAR"
+      },
+      "hiring_team": "VARCHAR",
+      "custom_attributes": "VARCHAR"
+    },
+    "CANDIDATES": {
+      "$path": ["/candidates"],
+      "$data_path": "candidates",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "firstname": "VARCHAR",
+      "lastname": "VARCHAR",
+      "email": "VARCHAR",
+      "headline": "VARCHAR",
+      "account[]": {
+        "subdomain": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "job[]": {
+        "shortcode": "VARCHAR",
+        "title": "VARCHAR"
+      },
+      "stage": "VARCHAR",
+      "disqualified": "BOOLEAN",
+      "disqualification_reason": "VARCHAR",
+      "hired_at": "TIMESTAMP",
+      "sourced": "BOOLEAN",
+      "profile_url": "VARCHAR",
+      "address": "VARCHAR",
+      "phone": "VARCHAR",
+      "cover_letter": "VARCHAR",
+      "summary": "VARCHAR",
+      "resume_url": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "CANDIDATE_DETAILS": {
+      "$path": ["/candidates/{id}"],
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "firstname": "VARCHAR",
+      "lastname": "VARCHAR",
+      "email": "VARCHAR",
+      "headline": "VARCHAR",
+      "account[]": {
+        "subdomain": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "job[]": {
+        "shortcode": "VARCHAR",
+        "title": "VARCHAR"
+      },
+      "stage": "VARCHAR",
+      "disqualified": "BOOLEAN",
+      "disqualification_reason": "VARCHAR",
+      "hired_at": "TIMESTAMP",
+      "sourced": "BOOLEAN",
+      "profile_url": "VARCHAR",
+      "address": "VARCHAR",
+      "phone": "VARCHAR",
+      "cover_letter": "VARCHAR",
+      "summary": "VARCHAR",
+      "resume_url": "VARCHAR",
+      "outbound_mailbox": "VARCHAR",
+      "tags": "VARCHAR",
+      "social_profiles": "VARCHAR",
+      "educations": "VARCHAR",
+      "experiences": "VARCHAR",
+      "answers": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "STAGES": {
+      "$path": ["/stages"],
+      "$data_path": "stages",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "slug": "VARCHAR",
+      "position": "INTEGER",
+      "kind": "VARCHAR"
+    },
+    "MEMBERS": {
+      "$path": ["/members"],
+      "$data_path": "members",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "email": "VARCHAR",
+      "role": "VARCHAR",
+      "headline": "VARCHAR",
+      "avatar": "VARCHAR",
+      "created_at": "TIMESTAMP"
+    },
+    "RECRUITERS": {
+      "$path": ["/recruiters"],
+      "$data_path": "recruiters",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "email": "VARCHAR",
+      "role": "VARCHAR",
+      "avatar": "VARCHAR"
+    },
+    "REQUISITIONS": {
+      "$path": ["/requisitions"],
+      "$data_path": "requisitions",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "state": "VARCHAR",
+      "department": "VARCHAR",
+      "location[]": {
+        "location_str": "VARCHAR",
+        "country": "VARCHAR",
+        "city": "VARCHAR"
+      },
+      "employment_type": "VARCHAR",
+      "positions_to_fill": "INTEGER",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "JOB_APPLICATIONS": {
+      "$path": ["/jobs/{shortcode}/candidates"],
+      "$data_path": "candidates",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "firstname": "VARCHAR",
+      "lastname": "VARCHAR",
+      "email": "VARCHAR",
+      "stage": "VARCHAR",
+      "disqualified": "BOOLEAN",
+      "applied_at": "TIMESTAMP",
+      "sourced": "BOOLEAN",
+      "profile_url": "VARCHAR",
+      "rating": "DECIMAL",
+      "created_at": "TIMESTAMP"
+    },
+    "CUSTOM_ATTRIBUTES": {
+      "$path": ["/custom_attributes/candidates"],
+      "$data_path": "custom_attributes",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "value_type": "VARCHAR",
+      "required": "BOOLEAN",
+      "searchable": "BOOLEAN",
+      "values": "VARCHAR"
+    },
+    "ACTIVITIES": {
+      "$path": ["/candidates/{candidate_id}/activities"],
+      "$data_path": "activities",
+      "id": "VARCHAR,$key",
+      "action": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "member[]": {
+        "id": "VARCHAR",
+        "name": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "body": "VARCHAR",
+      "stage": "VARCHAR"
+    },
+    "EVENTS": {
+      "$path": ["/events"],
+      "$data_path": "events",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "data": "VARCHAR"
+    }
+  }
+}

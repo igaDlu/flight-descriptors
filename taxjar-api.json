@@ -1,0 +1,127 @@
+{
+  "$connector_name": "TaxJar API Connector",
+  "$connector_label": "TaxJar API",
+  "$connector_description": "Connector for TaxJar sales tax API - provides access to tax categories, rates, calculations, transactions, customers, nexus regions, and validations",
+  "$hostname": "https://api.taxjar.com",
+  "$authentication": "api_key",
+  "$tables": {
+    "CATEGORIES": {
+      "$path": ["/v2/categories"],
+      "$data_path": "categories",
+      "ROWID": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "product_tax_code": "VARCHAR",
+      "description": "VARCHAR"
+    },
+    "RATES_FOR_LOCATION": {
+      "$path": ["/v2/rates/{zip}"],
+      "$data_path": "rate",
+      "ROWID": "VARCHAR,$key",
+      "zip": "VARCHAR",
+      "country": "VARCHAR",
+      "country_rate": "DOUBLE",
+      "state": "VARCHAR",
+      "state_rate": "DOUBLE",
+      "county": "VARCHAR",
+      "county_rate": "DOUBLE",
+      "city": "VARCHAR",
+      "city_rate": "DOUBLE",
+      "combined_district_rate": "DOUBLE",
+      "combined_rate": "DOUBLE",
+      "freight_taxable": "BOOLEAN",
+      "name": "VARCHAR"
+    },
+    "TRANSACTIONS_ORDERS": {
+      "$path": ["/v2/transactions/orders"],
+      "$data_path": "orders",
+      "transaction_id": "VARCHAR,$key",
+      "user_id": "INTEGER",
+      "transaction_date": "DATE",
+      "transaction_reference_id": "VARCHAR",
+      "provider": "VARCHAR",
+      "from_country": "VARCHAR",
+      "from_zip": "VARCHAR",
+      "from_state": "VARCHAR",
+      "from_city": "VARCHAR",
+      "from_street": "VARCHAR",
+      "to_country": "VARCHAR",
+      "to_zip": "VARCHAR",
+      "to_state": "VARCHAR",
+      "to_city": "VARCHAR",
+      "to_street": "VARCHAR",
+      "amount": "DOUBLE",
+      "shipping": "DOUBLE",
+      "sales_tax": "DOUBLE"
+    },
+    "TRANSACTIONS_REFUNDS": {
+      "$path": ["/v2/transactions/refunds"],
+      "$data_path": "refunds",
+      "transaction_id": "VARCHAR,$key",
+      "user_id": "INTEGER",
+      "transaction_date": "DATE",
+      "transaction_reference_id": "VARCHAR",
+      "provider": "VARCHAR",
+      "from_country": "VARCHAR",
+      "from_zip": "VARCHAR",
+      "from_state": "VARCHAR",
+      "from_city": "VARCHAR",
+      "from_street": "VARCHAR",
+      "to_country": "VARCHAR",
+      "to_zip": "VARCHAR",
+      "to_state": "VARCHAR",
+      "to_city": "VARCHAR",
+      "to_street": "VARCHAR",
+      "amount": "DOUBLE",
+      "shipping": "DOUBLE",
+      "sales_tax": "DOUBLE"
+    },
+    "CUSTOMERS": {
+      "$path": ["/v2/customers"],
+      "$data_path": "customers",
+      "customer_id": "VARCHAR,$key",
+      "exemption_type": "VARCHAR",
+      "exempt_regions": "VARCHAR",
+      "country": "VARCHAR",
+      "state": "VARCHAR",
+      "zip": "VARCHAR",
+      "city": "VARCHAR",
+      "street": "VARCHAR"
+    },
+    "NEXUS_REGIONS": {
+      "$path": ["/v2/nexus/regions"],
+      "$data_path": "regions",
+      "ROWID": "VARCHAR,$key",
+      "country_code": "VARCHAR",
+      "country": "VARCHAR",
+      "region_code": "VARCHAR",
+      "region": "VARCHAR"
+    },
+    "ADDRESSES_VALIDATION": {
+      "$path": ["/v2/addresses/validate"],
+      "$data_path": "addresses",
+      "ROWID": "VARCHAR,$key",
+      "country": "VARCHAR",
+      "state": "VARCHAR",
+      "zip": "VARCHAR",
+      "city": "VARCHAR",
+      "street": "VARCHAR"
+    },
+    "SUMMARY_RATES": {
+      "$path": ["/v2/summary_rates"],
+      "$data_path": "summary_rates",
+      "ROWID": "VARCHAR,$key",
+      "country_code": "VARCHAR",
+      "country": "VARCHAR",
+      "region_code": "VARCHAR",
+      "region": "VARCHAR",
+      "minimum_rate[]": {
+        "label": "VARCHAR",
+        "rate": "DOUBLE"
+      },
+      "average_rate[]": {
+        "label": "VARCHAR",
+        "rate": "DOUBLE"
+      }
+    }
+  }
+}

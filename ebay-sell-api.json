@@ -1,0 +1,195 @@
+{
+  "$connector_name": "eBay Sell API Connector",
+  "$connector_label": "eBay Sell API",
+  "$connector_description": "Connector for eBay Sell API - provides access to inventory, offers, listings, and fulfillment management",
+  "$hostname": "https://api.ebay.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "INVENTORY_ITEMS": {
+      "$path": ["/sell/inventory/v1/inventory_item"],
+      "$data_path": "inventoryItems",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "sku": "VARCHAR,$key",
+      "locale": "VARCHAR",
+      "condition": "VARCHAR",
+      "conditionDescription": "VARCHAR",
+      "availability[]": {
+        "shipToLocationAvailability[]": {
+          "quantity": "INTEGER"
+        }
+      },
+      "product[]": {
+        "title": "VARCHAR",
+        "description": "VARCHAR",
+        "brand": "VARCHAR",
+        "mpn": "VARCHAR",
+        "imageUrls": "VARCHAR",
+        "aspects": "VARCHAR",
+        "isbn": "VARCHAR",
+        "upc": "VARCHAR",
+        "ean": "VARCHAR",
+        "epid": "VARCHAR"
+      },
+      "packageWeightAndSize[]": {
+        "dimensions[]": {
+          "height": "VARCHAR",
+          "length": "VARCHAR",
+          "width": "VARCHAR",
+          "unit": "VARCHAR"
+        },
+        "weight[]": {
+          "value": "VARCHAR",
+          "unit": "VARCHAR"
+        }
+      }
+    },
+    "OFFERS": {
+      "$path": ["/sell/inventory/v1/offer"],
+      "$data_path": "offers",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "offerId": "VARCHAR,$key",
+      "sku": "VARCHAR",
+      "marketplaceId": "VARCHAR",
+      "format": "VARCHAR",
+      "availableQuantity": "INTEGER",
+      "categoryId": "VARCHAR",
+      "listingDescription": "VARCHAR",
+      "listingPolicies[]": {
+        "fulfillmentPolicyId": "VARCHAR",
+        "paymentPolicyId": "VARCHAR",
+        "returnPolicyId": "VARCHAR"
+      },
+      "pricingSummary[]": {
+        "price[]": {
+          "value": "VARCHAR",
+          "currency": "VARCHAR"
+        }
+      },
+      "quantityLimitPerBuyer": "INTEGER",
+      "status": "VARCHAR",
+      "listingDuration": "VARCHAR",
+      "merchantLocationKey": "VARCHAR",
+      "tax[]": {
+        "applyTax": "BOOLEAN",
+        "vatPercentage": "VARCHAR"
+      },
+      "includeCatalogProductDetails": "BOOLEAN",
+      "hideBuyerDetails": "BOOLEAN"
+    },
+    "LISTINGS": {
+      "$path": ["/sell/inventory/v1/inventory_item/{sku}/offer"],
+      "$data_path": "offers",
+      "offerId": "VARCHAR,$key",
+      "sku": "VARCHAR",
+      "marketplaceId": "VARCHAR",
+      "format": "VARCHAR",
+      "listingId": "VARCHAR",
+      "status": "VARCHAR",
+      "availableQuantity": "INTEGER",
+      "soldQuantity": "INTEGER"
+    },
+    "FULFILLMENT_POLICIES": {
+      "$path": ["/sell/account/v1/fulfillment_policy"],
+      "$data_path": "fulfillmentPolicies",
+      "fulfillmentPolicyId": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "marketplaceId": "VARCHAR",
+      "categoryTypes": "VARCHAR",
+      "handlingTime[]": {
+        "value": "INTEGER",
+        "unit": "VARCHAR"
+      },
+      "shippingOptions": "VARCHAR",
+      "globalShipping": "BOOLEAN",
+      "pickupDropOff": "BOOLEAN",
+      "freightShipping": "BOOLEAN"
+    },
+    "PAYMENT_POLICIES": {
+      "$path": ["/sell/account/v1/payment_policy"],
+      "$data_path": "paymentPolicies",
+      "paymentPolicyId": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "marketplaceId": "VARCHAR",
+      "categoryTypes": "VARCHAR",
+      "paymentMethods": "VARCHAR",
+      "immediatePay": "BOOLEAN",
+      "paymentInstructions": "VARCHAR"
+    },
+    "RETURN_POLICIES": {
+      "$path": ["/sell/account/v1/return_policy"],
+      "$data_path": "returnPolicies",
+      "returnPolicyId": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "marketplaceId": "VARCHAR",
+      "categoryTypes": "VARCHAR",
+      "returnsAccepted": "BOOLEAN",
+      "returnPeriod[]": {
+        "value": "INTEGER",
+        "unit": "VARCHAR"
+      },
+      "refundMethod": "VARCHAR",
+      "returnMethod": "VARCHAR",
+      "returnShippingCostPayer": "VARCHAR",
+      "returnInstructions": "VARCHAR"
+    },
+    "ORDERS": {
+      "$path": ["/sell/fulfillment/v1/order"],
+      "$data_path": "orders",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "orderId": "VARCHAR,$key",
+      "legacyOrderId": "VARCHAR",
+      "creationDate": "TIMESTAMP",
+      "lastModifiedDate": "TIMESTAMP",
+      "orderFulfillmentStatus": "VARCHAR",
+      "orderPaymentStatus": "VARCHAR",
+      "sellerId": "VARCHAR",
+      "buyer[]": {
+        "username": "VARCHAR",
+        "taxAddress[]": {
+          "city": "VARCHAR",
+          "stateOrProvince": "VARCHAR",
+          "postalCode": "VARCHAR",
+          "countryCode": "VARCHAR"
+        }
+      },
+      "pricingSummary[]": {
+        "priceSubtotal[]": {
+          "value": "VARCHAR",
+          "currency": "VARCHAR"
+        },
+        "total[]": {
+          "value": "VARCHAR",
+          "currency": "VARCHAR"
+        }
+      },
+      "cancelStatus[]": {
+        "cancelState": "VARCHAR",
+        "cancelledDate": "TIMESTAMP"
+      },
+      "lineItems": "VARCHAR",
+      "fulfillmentStartInstructions": "VARCHAR",
+      "fulfillmentHrefs": "VARCHAR"
+    }
+  }
+}

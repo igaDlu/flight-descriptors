@@ -1,0 +1,287 @@
+{
+  "$connector_name": "Egnyte API Connector",
+  "$connector_label": "Egnyte API",
+  "$connector_description": "Connector for Egnyte REST API - provides access to files, folders, users, groups, permissions, links, and audit logs",
+  "$hostname": "https://{domain}.egnyte.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "FILES": {
+      "$path": ["/pubapi/v1/fs/{path}"],
+      "checksum": "VARCHAR",
+      "size": "BIGINT",
+      "path": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "locked": "BOOLEAN",
+      "is_folder": "BOOLEAN",
+      "entry_id": "VARCHAR",
+      "group_id": "VARCHAR",
+      "last_modified": "TIMESTAMP",
+      "uploaded": "TIMESTAMP",
+      "num_versions": "INTEGER",
+      "uploaded_by": "VARCHAR",
+      "lock_owner": "VARCHAR",
+      "lock_token": "VARCHAR"
+    },
+    "FOLDERS": {
+      "$path": ["/pubapi/v1/fs/{path}"],
+      "is_folder": "BOOLEAN",
+      "path": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "folder_id": "VARCHAR",
+      "folders": "VARCHAR",
+      "files": "VARCHAR",
+      "total_count": "INTEGER",
+      "offset": "INTEGER",
+      "count": "INTEGER",
+      "restrict_move_delete": "BOOLEAN",
+      "public_links": "VARCHAR",
+      "allowed_file_link_types": "VARCHAR",
+      "allowed_folder_link_types": "VARCHAR"
+    },
+    "FOLDER_LISTING": {
+      "$path": ["/pubapi/v1/fs/{path}"],
+      "$data_path": "files",
+      "checksum": "VARCHAR",
+      "size": "BIGINT",
+      "path": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "locked": "BOOLEAN",
+      "is_folder": "BOOLEAN",
+      "entry_id": "VARCHAR",
+      "group_id": "VARCHAR",
+      "last_modified": "TIMESTAMP",
+      "uploaded": "TIMESTAMP",
+      "num_versions": "INTEGER",
+      "uploaded_by": "VARCHAR"
+    },
+    "FILE_VERSIONS": {
+      "$path": ["/pubapi/v1/fs-content/{path}/versions"],
+      "$data_path": "versions",
+      "entry_id": "VARCHAR,$key",
+      "size": "BIGINT",
+      "checksum": "VARCHAR",
+      "last_modified": "TIMESTAMP",
+      "uploaded": "TIMESTAMP",
+      "uploaded_by": "VARCHAR",
+      "num_versions": "INTEGER"
+    },
+    "USERS": {
+      "$path": ["/pubapi/v2/users"],
+      "$data_path": "resources",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startIndex",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 1
+      },
+      "id": "VARCHAR,$key",
+      "userName": "VARCHAR",
+      "externalId": "VARCHAR",
+      "name[]": {
+        "familyName": "VARCHAR",
+        "givenName": "VARCHAR"
+      },
+      "email": "VARCHAR",
+      "active": "BOOLEAN",
+      "locked": "BOOLEAN",
+      "authType": "VARCHAR",
+      "userType": "VARCHAR",
+      "role": "VARCHAR",
+      "idpUserId": "VARCHAR",
+      "userPrincipalName": "VARCHAR",
+      "emails": "VARCHAR",
+      "addresses": "VARCHAR",
+      "phoneNumbers": "VARCHAR"
+    },
+    "USER_DETAILS": {
+      "$path": ["/pubapi/v2/users/{id}"],
+      "id": "VARCHAR,$key",
+      "userName": "VARCHAR",
+      "externalId": "VARCHAR",
+      "name[]": {
+        "familyName": "VARCHAR",
+        "givenName": "VARCHAR"
+      },
+      "email": "VARCHAR",
+      "active": "BOOLEAN",
+      "locked": "BOOLEAN",
+      "authType": "VARCHAR",
+      "userType": "VARCHAR",
+      "role": "VARCHAR",
+      "idpUserId": "VARCHAR",
+      "userPrincipalName": "VARCHAR",
+      "emails": "VARCHAR",
+      "addresses": "VARCHAR",
+      "phoneNumbers": "VARCHAR",
+      "schemas": "VARCHAR",
+      "meta[]": {
+        "resourceType": "VARCHAR",
+        "created": "TIMESTAMP",
+        "lastModified": "TIMESTAMP",
+        "location": "VARCHAR"
+      }
+    },
+    "GROUPS": {
+      "$path": ["/pubapi/v2/groups"],
+      "$data_path": "resources",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startIndex",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 1
+      },
+      "id": "VARCHAR,$key",
+      "displayName": "VARCHAR",
+      "members": "VARCHAR"
+    },
+    "GROUP_DETAILS": {
+      "$path": ["/pubapi/v2/groups/{id}"],
+      "id": "VARCHAR,$key",
+      "displayName": "VARCHAR",
+      "members": "VARCHAR",
+      "schemas": "VARCHAR",
+      "meta[]": {
+        "resourceType": "VARCHAR",
+        "created": "TIMESTAMP",
+        "lastModified": "TIMESTAMP",
+        "location": "VARCHAR"
+      }
+    },
+    "PERMISSIONS": {
+      "$path": ["/pubapi/v1/perms/folder/{path}"],
+      "$data_path": "users",
+      "subject": "VARCHAR,$key",
+      "permission": "VARCHAR"
+    },
+    "GROUP_PERMISSIONS": {
+      "$path": ["/pubapi/v1/perms/folder/{path}"],
+      "$data_path": "groups",
+      "subject": "VARCHAR,$key",
+      "permission": "VARCHAR"
+    },
+    "EFFECTIVE_PERMISSIONS": {
+      "$path": ["/pubapi/v1/perms/user/{username}"],
+      "$data_path": "folders",
+      "path": "VARCHAR,$key",
+      "permission": "VARCHAR"
+    },
+    "LINKS": {
+      "$path": ["/pubapi/v1/links"],
+      "$data_path": "links",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "url": "VARCHAR",
+      "path": "VARCHAR",
+      "type": "VARCHAR",
+      "accessibility": "VARCHAR",
+      "notify": "BOOLEAN",
+      "link_to_current": "BOOLEAN",
+      "creation_date": "TIMESTAMP",
+      "created_by": "VARCHAR",
+      "recipients": "VARCHAR",
+      "send_email": "BOOLEAN",
+      "copy_me": "BOOLEAN",
+      "expiry_date": "TIMESTAMP",
+      "expiry_clicks": "INTEGER",
+      "add_filename": "BOOLEAN",
+      "resource_id": "VARCHAR"
+    },
+    "LINK_DETAILS": {
+      "$path": ["/pubapi/v1/links/{id}"],
+      "id": "VARCHAR,$key",
+      "url": "VARCHAR",
+      "path": "VARCHAR",
+      "type": "VARCHAR",
+      "accessibility": "VARCHAR",
+      "notify": "BOOLEAN",
+      "link_to_current": "BOOLEAN",
+      "creation_date": "TIMESTAMP",
+      "created_by": "VARCHAR",
+      "recipients": "VARCHAR",
+      "send_email": "BOOLEAN",
+      "copy_me": "BOOLEAN",
+      "expiry_date": "TIMESTAMP",
+      "expiry_clicks": "INTEGER",
+      "add_filename": "BOOLEAN",
+      "resource_id": "VARCHAR",
+      "password_protected": "BOOLEAN",
+      "clicks": "INTEGER"
+    },
+    "AUDIT_REPORTS": {
+      "$path": ["/pubapi/v1/audit/logins"],
+      "$data_path": "events",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 1000,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "timestamp": "TIMESTAMP",
+      "username": "VARCHAR",
+      "email": "VARCHAR",
+      "action": "VARCHAR",
+      "source_ip": "VARCHAR",
+      "user_agent": "VARCHAR",
+      "success": "BOOLEAN",
+      "failure_reason": "VARCHAR"
+    },
+    "FILE_AUDIT_REPORTS": {
+      "$path": ["/pubapi/v1/audit/files"],
+      "$data_path": "events",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 1000,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "timestamp": "TIMESTAMP",
+      "username": "VARCHAR",
+      "email": "VARCHAR",
+      "action": "VARCHAR",
+      "source_ip": "VARCHAR",
+      "user_agent": "VARCHAR",
+      "path": "VARCHAR",
+      "filename": "VARCHAR",
+      "folder": "VARCHAR",
+      "file_id": "VARCHAR",
+      "version": "INTEGER",
+      "source_path": "VARCHAR",
+      "destination_path": "VARCHAR"
+    },
+    "PERMISSION_AUDIT_REPORTS": {
+      "$path": ["/pubapi/v1/audit/permissions"],
+      "$data_path": "events",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 1000,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "timestamp": "TIMESTAMP",
+      "username": "VARCHAR",
+      "email": "VARCHAR",
+      "action": "VARCHAR",
+      "source_ip": "VARCHAR",
+      "user_agent": "VARCHAR",
+      "path": "VARCHAR",
+      "assignee": "VARCHAR",
+      "assignee_type": "VARCHAR",
+      "permission": "VARCHAR",
+      "old_permission": "VARCHAR"
+    }
+  }
+}

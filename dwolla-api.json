@@ -1,0 +1,265 @@
+{
+  "$connector_name": "Dwolla API Connector",
+  "$connector_label": "Dwolla Payment Platform",
+  "$connector_description": "Connector for Dwolla API - provides access to customers, transfers, funding sources, webhooks, events, and ACH payment data",
+  "$hostname": "https://api.dwolla.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "CUSTOMERS": {
+      "$path": ["/customers"],
+      "$data_path": "_embedded.customers",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "firstName": "VARCHAR",
+      "lastName": "VARCHAR",
+      "email": "VARCHAR",
+      "type": "VARCHAR",
+      "status": "VARCHAR",
+      "created": "TIMESTAMP",
+      "address1": "VARCHAR",
+      "address2": "VARCHAR",
+      "city": "VARCHAR",
+      "state": "VARCHAR",
+      "postalCode": "VARCHAR",
+      "country": "VARCHAR",
+      "phone": "VARCHAR",
+      "businessName": "VARCHAR",
+      "businessType": "VARCHAR",
+      "businessClassification": "VARCHAR",
+      "ein": "VARCHAR",
+      "website": "VARCHAR",
+      "controller": "VARCHAR",
+      "correlationId": "VARCHAR"
+    },
+    "CUSTOMER_DETAILS": {
+      "$path": ["/customers/{id}"],
+      "id": "VARCHAR,$key",
+      "firstName": "VARCHAR",
+      "lastName": "VARCHAR",
+      "email": "VARCHAR",
+      "type": "VARCHAR",
+      "status": "VARCHAR",
+      "created": "TIMESTAMP",
+      "address1": "VARCHAR",
+      "address2": "VARCHAR",
+      "city": "VARCHAR",
+      "state": "VARCHAR",
+      "postalCode": "VARCHAR",
+      "country": "VARCHAR",
+      "phone": "VARCHAR",
+      "businessName": "VARCHAR",
+      "businessType": "VARCHAR",
+      "businessClassification": "VARCHAR",
+      "ein": "VARCHAR",
+      "website": "VARCHAR",
+      "controller[]": {
+        "firstName": "VARCHAR",
+        "lastName": "VARCHAR",
+        "title": "VARCHAR",
+        "dateOfBirth": "DATE",
+        "ssn": "VARCHAR",
+        "address[]": {
+          "address1": "VARCHAR",
+          "address2": "VARCHAR",
+          "city": "VARCHAR",
+          "stateProvinceRegion": "VARCHAR",
+          "postalCode": "VARCHAR",
+          "country": "VARCHAR"
+        }
+      },
+      "correlationId": "VARCHAR"
+    },
+    "TRANSFERS": {
+      "$path": ["/transfers"],
+      "$data_path": "_embedded.transfers",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "amount[]": {
+        "value": "DECIMAL",
+        "currency": "VARCHAR"
+      },
+      "created": "TIMESTAMP",
+      "metadata": "VARCHAR",
+      "clearing": "VARCHAR",
+      "achDetails": "VARCHAR",
+      "correlationId": "VARCHAR",
+      "individualAchId": "VARCHAR",
+      "processingChannel": "VARCHAR"
+    },
+    "TRANSFER_DETAILS": {
+      "$path": ["/transfers/{id}"],
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "amount[]": {
+        "value": "DECIMAL",
+        "currency": "VARCHAR"
+      },
+      "created": "TIMESTAMP",
+      "metadata": "VARCHAR",
+      "clearing[]": {
+        "source": "VARCHAR",
+        "destination": "VARCHAR"
+      },
+      "achDetails[]": {
+        "source[]": {
+          "addenda": "VARCHAR",
+          "traceId": "VARCHAR"
+        },
+        "destination[]": {
+          "addenda": "VARCHAR",
+          "traceId": "VARCHAR"
+        }
+      },
+      "correlationId": "VARCHAR",
+      "individualAchId": "VARCHAR",
+      "processingChannel": "VARCHAR"
+    },
+    "FUNDING_SOURCES": {
+      "$path": ["/customers/{customer_id}/funding-sources"],
+      "$data_path": "_embedded.funding-sources",
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "type": "VARCHAR",
+      "bankAccountType": "VARCHAR",
+      "name": "VARCHAR",
+      "created": "TIMESTAMP",
+      "removed": "BOOLEAN",
+      "channels": "VARCHAR",
+      "bankName": "VARCHAR",
+      "fingerprint": "VARCHAR"
+    },
+    "FUNDING_SOURCE_DETAILS": {
+      "$path": ["/funding-sources/{id}"],
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "type": "VARCHAR",
+      "bankAccountType": "VARCHAR",
+      "name": "VARCHAR",
+      "created": "TIMESTAMP",
+      "removed": "BOOLEAN",
+      "channels": "VARCHAR",
+      "bankName": "VARCHAR",
+      "fingerprint": "VARCHAR",
+      "balance[]": {
+        "value": "DECIMAL",
+        "currency": "VARCHAR"
+      }
+    },
+    "WEBHOOKS": {
+      "$path": ["/webhook-subscriptions"],
+      "$data_path": "_embedded.webhook-subscriptions",
+      "id": "VARCHAR,$key",
+      "url": "VARCHAR",
+      "created": "TIMESTAMP",
+      "paused": "BOOLEAN"
+    },
+    "WEBHOOK_EVENTS": {
+      "$path": ["/events"],
+      "$data_path": "_embedded.events",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "created": "TIMESTAMP",
+      "topic": "VARCHAR",
+      "resourceId": "VARCHAR",
+      "accountId": "VARCHAR"
+    },
+    "MASS_PAYMENTS": {
+      "$path": ["/mass-payments"],
+      "$data_path": "_embedded.mass-payments",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "created": "TIMESTAMP",
+      "metadata": "VARCHAR",
+      "total[]": {
+        "value": "DECIMAL",
+        "currency": "VARCHAR"
+      },
+      "totalFees[]": {
+        "value": "DECIMAL",
+        "currency": "VARCHAR"
+      },
+      "correlationId": "VARCHAR"
+    },
+    "MASS_PAYMENT_ITEMS": {
+      "$path": ["/mass-payments/{id}/items"],
+      "$data_path": "_embedded.items",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "amount[]": {
+        "value": "DECIMAL",
+        "currency": "VARCHAR"
+      },
+      "metadata": "VARCHAR",
+      "correlationId": "VARCHAR"
+    },
+    "BENEFICIAL_OWNERS": {
+      "$path": ["/customers/{customer_id}/beneficial-owners"],
+      "$data_path": "_embedded.beneficial-owners",
+      "id": "VARCHAR,$key",
+      "firstName": "VARCHAR",
+      "lastName": "VARCHAR",
+      "dateOfBirth": "DATE",
+      "ssn": "VARCHAR",
+      "address[]": {
+        "address1": "VARCHAR",
+        "address2": "VARCHAR",
+        "city": "VARCHAR",
+        "stateProvinceRegion": "VARCHAR",
+        "postalCode": "VARCHAR",
+        "country": "VARCHAR"
+      },
+      "verificationStatus": "VARCHAR",
+      "created": "TIMESTAMP"
+    },
+    "DOCUMENTS": {
+      "$path": ["/customers/{customer_id}/documents"],
+      "$data_path": "_embedded.documents",
+      "id": "VARCHAR,$key",
+      "type": "VARCHAR",
+      "status": "VARCHAR",
+      "created": "TIMESTAMP",
+      "failureReason": "VARCHAR",
+      "allFailureReasons": "VARCHAR"
+    },
+    "BUSINESS_CLASSIFICATIONS": {
+      "$path": ["/business-classifications"],
+      "$data_path": "_embedded.business-classifications",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "industryClassifications": "VARCHAR"
+    }
+  }
+}

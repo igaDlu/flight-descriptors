@@ -1,0 +1,132 @@
+{
+  "$connector_name": "eBay Commerce API Connector",
+  "$connector_label": "eBay Commerce API",
+  "$connector_description": "Connector for eBay Commerce API - provides access to taxonomy, charity, catalog, translation, and media services",
+  "$hostname": "https://api.ebay.com",
+  "$authentication": "oauth2",
+  "$tables": {
+    "CATEGORY_TREE": {
+      "$path": ["/commerce/taxonomy/v1/category_tree/{category_tree_id}"],
+      "categoryTreeId": "VARCHAR,$key",
+      "categoryTreeVersion": "VARCHAR",
+      "applicableMarketplaceIds": "VARCHAR",
+      "rootCategoryNode[]": {
+        "category[]": {
+          "categoryId": "VARCHAR",
+          "categoryName": "VARCHAR"
+        },
+        "categoryTreeNodeLevel": "INTEGER"
+      }
+    },
+    "CATEGORY_SUBTREE": {
+      "$path": ["/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_category_subtree"],
+      "categoryTreeId": "VARCHAR",
+      "categoryTreeVersion": "VARCHAR",
+      "categorySubtreeNode[]": {
+        "category[]": {
+          "categoryId": "VARCHAR,$key",
+          "categoryName": "VARCHAR"
+        },
+        "categoryTreeNodeLevel": "INTEGER",
+        "parentCategoryTreeNodeHref": "VARCHAR",
+        "childCategoryTreeNodes": "VARCHAR"
+      }
+    },
+    "CATEGORY_SUGGESTIONS": {
+      "$path": ["/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_category_suggestions"],
+      "categorySuggestions": "VARCHAR",
+      "categoryTreeId": "VARCHAR",
+      "categoryTreeVersion": "VARCHAR"
+    },
+    "ITEM_ASPECTS": {
+      "$path": ["/commerce/taxonomy/v1/category_tree/{category_tree_id}/get_item_aspects_for_category"],
+      "categoryTreeId": "VARCHAR",
+      "categoryTreeVersion": "VARCHAR",
+      "aspects": "VARCHAR"
+    },
+    "CHARITIES": {
+      "$path": ["/commerce/charity/v1/charity_org"],
+      "$data_path": "charityOrgs",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "charityOrgId": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "logoImage[]": {
+        "imageUrl": "VARCHAR"
+      },
+      "location[]": {
+        "city": "VARCHAR",
+        "stateOrProvince": "VARCHAR",
+        "country": "VARCHAR"
+      },
+      "missionStatement": "VARCHAR",
+      "registrationId": "VARCHAR",
+      "website": "VARCHAR"
+    },
+    "CHARITY_DETAILS": {
+      "$path": ["/commerce/charity/v1/charity_org/{charity_org_id}"],
+      "charityOrgId": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "logoImage[]": {
+        "imageUrl": "VARCHAR"
+      },
+      "location[]": {
+        "city": "VARCHAR",
+        "stateOrProvince": "VARCHAR",
+        "postalCode": "VARCHAR",
+        "country": "VARCHAR"
+      },
+      "missionStatement": "VARCHAR",
+      "registrationId": "VARCHAR",
+      "website": "VARCHAR"
+    },
+    "CATALOG_PRODUCTS": {
+      "$path": ["/commerce/catalog/v1/product_summary/search"],
+      "$data_path": "productSummaries",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 200,
+        "initial_offset": 0
+      },
+      "epid": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "brand": "VARCHAR",
+      "mpn": "VARCHAR",
+      "image[]": {
+        "imageUrl": "VARCHAR"
+      },
+      "additionalImages": "VARCHAR",
+      "aspects": "VARCHAR",
+      "gtins": "VARCHAR",
+      "productWebUrl": "VARCHAR"
+    },
+    "PRODUCT_DETAILS": {
+      "$path": ["/commerce/catalog/v1/product/{epid}"],
+      "epid": "VARCHAR,$key",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "brand": "VARCHAR",
+      "mpn": "VARCHAR",
+      "image[]": {
+        "imageUrl": "VARCHAR"
+      },
+      "additionalImages": "VARCHAR",
+      "aspects": "VARCHAR",
+      "gtins": "VARCHAR",
+      "productWebUrl": "VARCHAR"
+    },
+    "TRANSLATIONS": {
+      "$path": ["/commerce/translation/v1/translate"],
+      "translations": "VARCHAR"
+    }
+  }
+}

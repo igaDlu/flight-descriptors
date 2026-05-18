@@ -1,0 +1,256 @@
+{
+  "$connector_name": "CockroachDB Cluster API Connector",
+  "$connector_label": "CockroachDB Cluster",
+  "$connector_description": "Connector for CockroachDB Cluster API - provides access to cluster nodes, databases, sessions, health metrics, and monitoring data",
+  "$hostname": "https://<cluster-host>:8080",
+  "$authentication": "basic",
+  "$tables": {
+    "NODES": {
+      "$path": ["/_status/nodes"],
+      "$data_path": "nodes",
+      "node_id": "INTEGER,$key",
+      "address[]": {
+        "network_field": "VARCHAR",
+        "address_field": "VARCHAR"
+      },
+      "build_info[]": {
+        "go_version": "VARCHAR",
+        "tag": "VARCHAR",
+        "time": "VARCHAR",
+        "revision": "VARCHAR",
+        "cgo_compiler": "VARCHAR",
+        "platform": "VARCHAR",
+        "distribution": "VARCHAR",
+        "type": "VARCHAR",
+        "channel": "VARCHAR"
+      },
+      "started_at": "BIGINT",
+      "locality": "VARCHAR",
+      "server_version[]": {
+        "major_val": "INTEGER",
+        "minor_val": "INTEGER",
+        "patch": "INTEGER",
+        "internal": "INTEGER"
+      },
+      "metrics": "VARCHAR",
+      "total_system_memory": "BIGINT",
+      "num_cpus": "INTEGER"
+    },
+    "NODE_STATUS": {
+      "$path": ["/_status/nodes/{node_id}"],
+      "node_id": "INTEGER,$key",
+      "desc[]": {
+        "node_id": "INTEGER",
+        "address": "VARCHAR",
+        "locality": "VARCHAR"
+      },
+      "build_info[]": {
+        "go_version": "VARCHAR",
+        "tag": "VARCHAR",
+        "time": "VARCHAR",
+        "revision": "VARCHAR"
+      },
+      "started_at": "BIGINT",
+      "updated_at": "BIGINT",
+      "metrics": "VARCHAR",
+      "store_statuses": "VARCHAR",
+      "args": "VARCHAR",
+      "env": "VARCHAR",
+      "latencies": "VARCHAR",
+      "activity": "VARCHAR"
+    },
+    "DATABASES": {
+      "$path": ["/_status/databases"],
+      "$data_path": "databases",
+      "name": "VARCHAR,$key",
+      "size_bytes": "BIGINT",
+      "table_count": "INTEGER",
+      "range_count": "INTEGER"
+    },
+    "DATABASE_DETAILS": {
+      "$path": ["/_status/databases/{database}"],
+      "database_name": "VARCHAR,$key",
+      "table_names": "VARCHAR",
+      "grants": "VARCHAR",
+      "stats[]": {
+        "range_count": "INTEGER",
+        "approximate_disk_bytes": "BIGINT",
+        "live_bytes": "BIGINT",
+        "total_bytes": "BIGINT",
+        "key_bytes": "BIGINT",
+        "value_bytes": "BIGINT",
+        "intent_bytes": "BIGINT",
+        "live_count": "BIGINT",
+        "key_count": "BIGINT",
+        "value_count": "BIGINT",
+        "intent_count": "BIGINT"
+      }
+    },
+    "TABLES": {
+      "$path": ["/_status/databases/{database}/tables/{table}"],
+      "table_name": "VARCHAR,$key",
+      "database_name": "VARCHAR",
+      "grants": "VARCHAR",
+      "columns": "VARCHAR",
+      "indexes": "VARCHAR",
+      "range_count": "INTEGER",
+      "create_table_statement": "VARCHAR",
+      "zone_config": "VARCHAR",
+      "stats[]": {
+        "range_count": "INTEGER",
+        "approximate_disk_bytes": "BIGINT",
+        "live_bytes": "BIGINT",
+        "total_bytes": "BIGINT"
+      }
+    },
+    "SESSIONS": {
+      "$path": ["/_status/sessions"],
+      "$data_path": "sessions",
+      "node_id": "INTEGER",
+      "session_id": "VARCHAR,$key",
+      "username": "VARCHAR",
+      "client_address": "VARCHAR",
+      "application_name": "VARCHAR",
+      "active_queries": "VARCHAR",
+      "last_active_query": "VARCHAR",
+      "session_start": "TIMESTAMP",
+      "oldest_query_start": "TIMESTAMP",
+      "kv_txn": "VARCHAR",
+      "alloc_bytes": "BIGINT",
+      "max_alloc_bytes": "BIGINT"
+    },
+    "HEALTH": {
+      "$path": ["/health"],
+      "ROWID": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "message": "VARCHAR"
+    },
+    "CLUSTER_SETTINGS": {
+      "$path": ["/_admin/v1/settings"],
+      "$data_path": "key_values",
+      "key": "VARCHAR,$key",
+      "value": "VARCHAR",
+      "type": "VARCHAR",
+      "description": "VARCHAR",
+      "public": "BOOLEAN"
+    },
+    "RANGES": {
+      "$path": ["/_status/ranges/{node_id}"],
+      "$data_path": "ranges",
+      "range_id": "INTEGER,$key",
+      "start_key": "VARCHAR",
+      "end_key": "VARCHAR",
+      "database_name": "VARCHAR",
+      "table_name": "VARCHAR",
+      "index_name": "VARCHAR",
+      "replicas": "VARCHAR",
+      "lease_holder": "INTEGER",
+      "raft_state": "VARCHAR",
+      "quiescent": "BOOLEAN",
+      "ticking": "BOOLEAN",
+      "leader_range_count": "INTEGER",
+      "mvcc_stats[]": {
+        "live_bytes": "BIGINT",
+        "key_bytes": "BIGINT",
+        "value_bytes": "BIGINT",
+        "intent_bytes": "BIGINT",
+        "live_count": "BIGINT",
+        "key_count": "BIGINT",
+        "value_count": "BIGINT",
+        "intent_count": "BIGINT"
+      }
+    },
+    "EVENTS": {
+      "$path": ["/_admin/v1/events"],
+      "$data_path": "events",
+      "timestamp": "BIGINT,$key",
+      "event_type": "VARCHAR",
+      "target_id": "INTEGER",
+      "reporting_id": "INTEGER",
+      "info": "VARCHAR",
+      "unique_id": "VARCHAR"
+    },
+    "JOBS": {
+      "$path": ["/_status/jobs"],
+      "$data_path": "jobs",
+      "id": "BIGINT,$key",
+      "type": "VARCHAR",
+      "description": "VARCHAR",
+      "statement": "VARCHAR",
+      "username": "VARCHAR",
+      "descriptor_ids": "VARCHAR",
+      "status": "VARCHAR",
+      "created": "TIMESTAMP",
+      "started": "TIMESTAMP",
+      "finished": "TIMESTAMP",
+      "modified": "TIMESTAMP",
+      "fraction_completed": "DECIMAL",
+      "error": "VARCHAR",
+      "coordinator_id": "INTEGER"
+    },
+    "STATEMENTS": {
+      "$path": ["/_status/statements"],
+      "$data_path": "statements",
+      "key[]": {
+        "key_data[]": {
+          "query": "VARCHAR",
+          "app": "VARCHAR",
+          "distSQL": "BOOLEAN",
+          "failed": "BOOLEAN",
+          "opt": "BOOLEAN"
+        }
+      },
+      "stats[]": {
+        "count": "BIGINT",
+        "first_attempt_count": "BIGINT",
+        "max_retries": "BIGINT",
+        "num_rows[]": {
+          "mean": "DECIMAL",
+          "squared_diffs": "DECIMAL"
+        },
+        "parse_lat[]": {
+          "mean": "DECIMAL",
+          "squared_diffs": "DECIMAL"
+        },
+        "plan_lat[]": {
+          "mean": "DECIMAL",
+          "squared_diffs": "DECIMAL"
+        },
+        "run_lat[]": {
+          "mean": "DECIMAL",
+          "squared_diffs": "DECIMAL"
+        },
+        "service_lat[]": {
+          "mean": "DECIMAL",
+          "squared_diffs": "DECIMAL"
+        },
+        "overhead_lat[]": {
+          "mean": "DECIMAL",
+          "squared_diffs": "DECIMAL"
+        }
+      },
+      "ROWID": "VARCHAR,$key"
+    },
+    "HOTRANGES": {
+      "$path": ["/_status/hotranges"],
+      "$data_path": "hot_ranges_by_node_id",
+      "node_id": "INTEGER",
+      "range_id": "INTEGER,$key",
+      "qps": "DECIMAL",
+      "database_name": "VARCHAR",
+      "table_name": "VARCHAR",
+      "index_name": "VARCHAR",
+      "start_key": "VARCHAR",
+      "end_key": "VARCHAR"
+    },
+    "ALLOCATOR": {
+      "$path": ["/_status/allocator/node/{node_id}"],
+      "$data_path": "ranges",
+      "range_id": "INTEGER,$key",
+      "action": "VARCHAR",
+      "priority": "DECIMAL",
+      "target_node_id": "INTEGER",
+      "target_store_id": "INTEGER"
+    }
+  }
+}
