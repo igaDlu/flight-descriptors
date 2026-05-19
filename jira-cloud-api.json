@@ -1,0 +1,242 @@
+{
+  "$connector_name": "Jira Cloud Connector",
+  "$connector_label": "Jira Cloud",
+  "$connector_description": "Jira Cloud API Connector. Docs: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+  "$hostname": "https://{{domain}}.atlassian.net/rest/api/3",
+  "$authentication": "basic",
+  "$tables": {
+    "ISSUES": {
+      "$path": ["/search"],
+      "$data_path": "issues",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startAt",
+        "limit_param": "maxResults",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "key": "VARCHAR",
+      "self": "VARCHAR",
+      "fields[]": {
+        "summary": "VARCHAR",
+        "description": "VARCHAR",
+        "created": "TIMESTAMP",
+        "updated": "TIMESTAMP",
+        "duedate": "DATE",
+        "resolutiondate": "TIMESTAMP",
+        "priority[]": {
+          "id": "VARCHAR",
+          "name": "VARCHAR"
+        },
+        "status[]": {
+          "id": "VARCHAR",
+          "name": "VARCHAR",
+          "statusCategory[]": {
+            "id": "INTEGER",
+            "key": "VARCHAR",
+            "name": "VARCHAR"
+          }
+        },
+        "issuetype[]": {
+          "id": "VARCHAR",
+          "name": "VARCHAR",
+          "subtask": "BOOLEAN"
+        },
+        "project[]": {
+          "id": "VARCHAR",
+          "key": "VARCHAR",
+          "name": "VARCHAR"
+        },
+        "assignee[]": {
+          "accountId": "VARCHAR",
+          "displayName": "VARCHAR",
+          "emailAddress": "VARCHAR",
+          "active": "BOOLEAN"
+        },
+        "reporter[]": {
+          "accountId": "VARCHAR",
+          "displayName": "VARCHAR",
+          "emailAddress": "VARCHAR",
+          "active": "BOOLEAN"
+        },
+        "creator[]": {
+          "accountId": "VARCHAR",
+          "displayName": "VARCHAR",
+          "emailAddress": "VARCHAR",
+          "active": "BOOLEAN"
+        },
+        "resolution[]": {
+          "id": "VARCHAR",
+          "name": "VARCHAR"
+        },
+        "labels": "VARCHAR",
+        "components": "VARCHAR",
+        "fixVersions": "VARCHAR",
+        "versions": "VARCHAR",
+        "timetracking[]": {
+          "originalEstimate": "VARCHAR",
+          "remainingEstimate": "VARCHAR",
+          "timeSpent": "VARCHAR",
+          "originalEstimateSeconds": "INTEGER",
+          "remainingEstimateSeconds": "INTEGER",
+          "timeSpentSeconds": "INTEGER"
+        },
+        "aggregatetimeoriginalestimate": "INTEGER",
+        "aggregatetimespent": "INTEGER",
+        "aggregatetimeestimate": "INTEGER",
+        "workratio": "INTEGER",
+        "watches[]": {
+          "watchCount": "INTEGER",
+          "isWatching": "BOOLEAN"
+        },
+        "votes[]": {
+          "votes": "INTEGER",
+          "hasVoted": "BOOLEAN"
+        },
+        "comment[]": {
+          "total": "INTEGER"
+        },
+        "attachment": "VARCHAR",
+        "subtasks": "VARCHAR",
+        "issuelinks": "VARCHAR"
+      }
+    },
+    "PROJECTS": {
+      "$path": ["/project/search"],
+      "$data_path": "values",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startAt",
+        "limit_param": "maxResults",
+        "page_size": 50,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "key": "VARCHAR",
+      "name": "VARCHAR",
+      "self": "VARCHAR",
+      "projectTypeKey": "VARCHAR",
+      "simplified": "BOOLEAN",
+      "style": "VARCHAR",
+      "isPrivate": "BOOLEAN",
+      "lead[]": {
+        "accountId": "VARCHAR",
+        "displayName": "VARCHAR",
+        "emailAddress": "VARCHAR",
+        "active": "BOOLEAN"
+      },
+      "description": "VARCHAR",
+      "url": "VARCHAR",
+      "email": "VARCHAR",
+      "assigneeType": "VARCHAR",
+      "projectCategory[]": {
+        "id": "VARCHAR",
+        "name": "VARCHAR",
+        "description": "VARCHAR"
+      },
+      "issueTypes": "VARCHAR",
+      "versions": "VARCHAR",
+      "components": "VARCHAR",
+      "roles": "VARCHAR"
+    },
+    "USERS": {
+      "$path": ["/users/search"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startAt",
+        "limit_param": "maxResults",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "accountId": "VARCHAR,$key",
+      "accountType": "VARCHAR",
+      "displayName": "VARCHAR",
+      "emailAddress": "VARCHAR",
+      "active": "BOOLEAN",
+      "timeZone": "VARCHAR",
+      "locale": "VARCHAR",
+      "self": "VARCHAR",
+      "avatarUrls": "VARCHAR",
+      "groups": "VARCHAR",
+      "applicationRoles": "VARCHAR"
+    },
+    "WORKLOGS": {
+      "$path": ["/worklog/updated"],
+      "$data_path": "values",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startAt",
+        "limit_param": "maxResults",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "worklogId": "INTEGER,$key",
+      "updated": "TIMESTAMP",
+      "properties": "VARCHAR"
+    },
+    "ISSUE_TYPES": {
+      "$path": ["/issuetype"],
+      "id": "VARCHAR,$key",
+      "self": "VARCHAR",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "iconUrl": "VARCHAR",
+      "subtask": "BOOLEAN",
+      "avatarId": "INTEGER",
+      "hierarchyLevel": "INTEGER"
+    },
+    "PRIORITIES": {
+      "$path": ["/priority"],
+      "id": "VARCHAR,$key",
+      "self": "VARCHAR",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "iconUrl": "VARCHAR",
+      "statusColor": "VARCHAR"
+    },
+    "STATUSES": {
+      "$path": ["/status"],
+      "id": "VARCHAR,$key",
+      "self": "VARCHAR",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "iconUrl": "VARCHAR",
+      "statusCategory[]": {
+        "id": "INTEGER",
+        "key": "VARCHAR",
+        "name": "VARCHAR",
+        "colorName": "VARCHAR"
+      }
+    },
+    "FILTERS": {
+      "$path": ["/filter/search"],
+      "$data_path": "values",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "startAt",
+        "limit_param": "maxResults",
+        "page_size": 50,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "self": "VARCHAR",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "owner[]": {
+        "accountId": "VARCHAR",
+        "displayName": "VARCHAR",
+        "emailAddress": "VARCHAR",
+        "active": "BOOLEAN"
+      },
+      "jql": "VARCHAR",
+      "viewUrl": "VARCHAR",
+      "searchUrl": "VARCHAR",
+      "favourite": "BOOLEAN",
+      "favouritedCount": "INTEGER",
+      "sharePermissions": "VARCHAR",
+      "editPermissions": "VARCHAR",
+      "subscriptions": "VARCHAR"
+    }
+  }
+}

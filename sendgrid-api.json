@@ -1,0 +1,229 @@
+{
+  "$connector_name": "SendGrid API v3 Connector",
+  "$connector_label": "SendGrid API v3",
+  "$connector_description": "Connector for SendGrid API v3 - provides access to email campaigns, contacts, lists, templates, suppressions, and email activity data",
+  "$hostname": "https://api.sendgrid.com",
+  "$authentication": "api_key",
+  "$tables": {
+    "CAMPAIGNS": {
+      "$path": ["/v3/marketing/campaigns"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page_token",
+        "limit_param": "page_size",
+        "page_size": 100
+      },
+      "$data_path": "result",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "status": "VARCHAR",
+      "send_at": "TIMESTAMP",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "categories": "VARCHAR",
+      "custom_unsubscribe_url": "VARCHAR",
+      "ip_pool": "VARCHAR",
+      "suppression_group_id": "INTEGER",
+      "sender_id": "INTEGER",
+      "list_ids": "VARCHAR",
+      "segment_ids": "VARCHAR",
+      "subject": "VARCHAR",
+      "html_content": "VARCHAR",
+      "plain_content": "VARCHAR",
+      "editor": "VARCHAR"
+    },
+    "CONTACTS": {
+      "$path": ["/v3/marketing/contacts"],
+      "$pagination": {
+        "type": "cursor",
+        "cursor_param": "page_token",
+        "next_cursor_path": "_metadata.next",
+        "page_size": 1000
+      },
+      "$data_path": "result",
+      "id": "VARCHAR,$key",
+      "email": "VARCHAR",
+      "first_name": "VARCHAR",
+      "last_name": "VARCHAR",
+      "alternate_emails": "VARCHAR",
+      "address_line_1": "VARCHAR",
+      "address_line_2": "VARCHAR",
+      "city": "VARCHAR",
+      "state_province_region": "VARCHAR",
+      "postal_code": "VARCHAR",
+      "country": "VARCHAR",
+      "phone_number": "VARCHAR",
+      "whatsapp": "VARCHAR",
+      "line": "VARCHAR",
+      "facebook": "VARCHAR",
+      "unique_name": "VARCHAR",
+      "custom_fields": "VARCHAR",
+      "list_ids": "VARCHAR",
+      "segment_ids": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "LISTS": {
+      "$path": ["/v3/marketing/lists"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page_token",
+        "limit_param": "page_size",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "contact_count": "INTEGER",
+      "_metadata[]": {
+        "self": "VARCHAR"
+      }
+    },
+    "SEGMENTS": {
+      "$path": ["/v3/marketing/segments"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page_token",
+        "limit_param": "page_size",
+        "page_size": 100
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "contacts_count": "INTEGER",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "sample_updated_at": "TIMESTAMP",
+      "next_sample_update": "TIMESTAMP",
+      "parent_list_ids": "VARCHAR",
+      "query_version": "VARCHAR",
+      "status": "VARCHAR"
+    },
+    "TEMPLATES": {
+      "$path": ["/v3/templates"],
+      "$pagination": {
+        "type": "page",
+        "page_param": "page_token",
+        "limit_param": "page_size",
+        "page_size": 100
+      },
+      "$data_path": "result",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "generation": "VARCHAR",
+      "updated_at": "TIMESTAMP",
+      "versions": "VARCHAR"
+    },
+    "SENDERS": {
+      "$path": ["/v3/marketing/senders"],
+      "$data_path": "results",
+      "id": "INTEGER,$key",
+      "nickname": "VARCHAR",
+      "from[]": {
+        "email": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "reply_to[]": {
+        "email": "VARCHAR",
+        "name": "VARCHAR"
+      },
+      "address": "VARCHAR",
+      "address_2": "VARCHAR",
+      "city": "VARCHAR",
+      "state": "VARCHAR",
+      "zip": "VARCHAR",
+      "country": "VARCHAR",
+      "verified": "BOOLEAN",
+      "locked": "BOOLEAN",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "SUPPRESSION_GROUPS": {
+      "$path": ["/v3/asm/groups"],
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "is_default": "BOOLEAN",
+      "unsubscribes": "INTEGER",
+      "last_email_sent_at": "TIMESTAMP"
+    },
+    "GLOBAL_SUPPRESSIONS": {
+      "$path": ["/v3/suppression/unsubscribes"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 500,
+        "initial_offset": 0
+      },
+      "created": "BIGINT,$key",
+      "email": "VARCHAR"
+    },
+    "BOUNCES": {
+      "$path": ["/v3/suppression/bounces"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 500,
+        "initial_offset": 0
+      },
+      "created": "BIGINT,$key",
+      "email": "VARCHAR",
+      "reason": "VARCHAR",
+      "status": "VARCHAR"
+    },
+    "BLOCKS": {
+      "$path": ["/v3/suppression/blocks"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 500,
+        "initial_offset": 0
+      },
+      "created": "BIGINT,$key",
+      "email": "VARCHAR",
+      "reason": "VARCHAR",
+      "status": "VARCHAR"
+    },
+    "SPAM_REPORTS": {
+      "$path": ["/v3/suppression/spam_reports"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 500,
+        "initial_offset": 0
+      },
+      "created": "BIGINT,$key",
+      "email": "VARCHAR",
+      "ip": "VARCHAR"
+    },
+    "INVALID_EMAILS": {
+      "$path": ["/v3/suppression/invalid_emails"],
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "limit",
+        "page_size": 500,
+        "initial_offset": 0
+      },
+      "created": "BIGINT,$key",
+      "email": "VARCHAR",
+      "reason": "VARCHAR"
+    },
+    "SUBUSERS": {
+      "$path": ["/v3/subusers"],
+      "id": "INTEGER,$key",
+      "username": "VARCHAR",
+      "email": "VARCHAR",
+      "disabled": "BOOLEAN"
+    },
+    "API_KEYS": {
+      "$path": ["/v3/api_keys"],
+      "$data_path": "result",
+      "api_key_id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "scopes": "VARCHAR"
+    }
+  }
+}

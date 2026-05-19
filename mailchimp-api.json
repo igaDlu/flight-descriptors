@@ -1,0 +1,487 @@
+{
+  "$connector_name": "Mailchimp Connector",
+  "$connector_label": "Mailchimp Marketing API",
+  "$connector_description": "Mailchimp Marketing API Connector. Docs: https://mailchimp.com/developer/marketing/api/",
+  "$hostname": "https://{{server_prefix}}.api.mailchimp.com/3.0",
+  "$authentication": "basic",
+  "$connection_properties": [
+    {
+      "name": "server_prefix",
+      "type": "string",
+      "required": true,
+      "label": "Server Prefix",
+      "description": "Your Mailchimp server prefix (e.g., 'us19'). Find this in your Mailchimp account URL."
+    }
+  ],
+  "$tables": {
+    "CAMPAIGNS": {
+      "$path": ["/campaigns"],
+      "$data_path": "campaigns",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "web_id": "INTEGER",
+      "type": "VARCHAR",
+      "create_time": "TIMESTAMP",
+      "archive_url": "VARCHAR",
+      "long_archive_url": "VARCHAR",
+      "status": "VARCHAR",
+      "emails_sent": "INTEGER",
+      "send_time": "TIMESTAMP",
+      "content_type": "VARCHAR",
+      "needs_block_refresh": "BOOLEAN",
+      "resendable": "BOOLEAN",
+      "recipients[]": {
+        "list_id": "VARCHAR",
+        "list_is_active": "BOOLEAN",
+        "list_name": "VARCHAR",
+        "segment_text": "VARCHAR",
+        "recipient_count": "INTEGER"
+      },
+      "settings[]": {
+        "subject_line": "VARCHAR",
+        "preview_text": "VARCHAR",
+        "title": "VARCHAR",
+        "from_name": "VARCHAR",
+        "reply_to": "VARCHAR",
+        "use_conversation": "BOOLEAN",
+        "to_name": "VARCHAR",
+        "folder_id": "VARCHAR",
+        "authenticate": "BOOLEAN",
+        "auto_footer": "BOOLEAN",
+        "inline_css": "BOOLEAN",
+        "auto_tweet": "BOOLEAN",
+        "fb_comments": "BOOLEAN",
+        "timewarp": "BOOLEAN",
+        "template_id": "INTEGER",
+        "drag_and_drop": "BOOLEAN"
+      },
+      "tracking[]": {
+        "opens": "BOOLEAN",
+        "html_clicks": "BOOLEAN",
+        "text_clicks": "BOOLEAN",
+        "goal_tracking": "BOOLEAN",
+        "ecomm360": "BOOLEAN",
+        "google_analytics": "VARCHAR",
+        "clicktale": "VARCHAR"
+      }
+    },
+    "LISTS": {
+      "$path": ["/lists"],
+      "$data_path": "lists",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "web_id": "INTEGER",
+      "name": "VARCHAR",
+      "contact[]": {
+        "company": "VARCHAR",
+        "address1": "VARCHAR",
+        "address2": "VARCHAR",
+        "city": "VARCHAR",
+        "state": "VARCHAR",
+        "zip": "VARCHAR",
+        "country": "VARCHAR",
+        "phone": "VARCHAR"
+      },
+      "permission_reminder": "VARCHAR",
+      "use_archive_bar": "BOOLEAN",
+      "campaign_defaults[]": {
+        "from_name": "VARCHAR",
+        "from_email": "VARCHAR",
+        "subject": "VARCHAR",
+        "language": "VARCHAR"
+      },
+      "notify_on_subscribe": "VARCHAR",
+      "notify_on_unsubscribe": "VARCHAR",
+      "date_created": "TIMESTAMP",
+      "list_rating": "INTEGER",
+      "email_type_option": "BOOLEAN",
+      "subscribe_url_short": "VARCHAR",
+      "subscribe_url_long": "VARCHAR",
+      "beamer_address": "VARCHAR",
+      "visibility": "VARCHAR",
+      "double_optin": "BOOLEAN",
+      "has_welcome": "BOOLEAN",
+      "marketing_permissions": "BOOLEAN",
+      "stats[]": {
+        "member_count": "INTEGER",
+        "total_contacts": "INTEGER",
+        "unsubscribe_count": "INTEGER",
+        "cleaned_count": "INTEGER",
+        "member_count_since_send": "INTEGER",
+        "unsubscribe_count_since_send": "INTEGER",
+        "cleaned_count_since_send": "INTEGER",
+        "campaign_count": "INTEGER",
+        "campaign_last_sent": "TIMESTAMP",
+        "merge_field_count": "INTEGER",
+        "avg_sub_rate": "DOUBLE",
+        "avg_unsub_rate": "DOUBLE",
+        "target_sub_rate": "DOUBLE",
+        "open_rate": "DOUBLE",
+        "click_rate": "DOUBLE",
+        "last_sub_date": "TIMESTAMP",
+        "last_unsub_date": "TIMESTAMP"
+      }
+    },
+    "TEMPLATES": {
+      "$path": ["/templates"],
+      "$data_path": "templates",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "INTEGER,$key",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "drag_and_drop": "BOOLEAN",
+      "responsive": "BOOLEAN",
+      "category": "VARCHAR",
+      "date_created": "TIMESTAMP",
+      "date_edited": "TIMESTAMP",
+      "created_by": "VARCHAR",
+      "edited_by": "VARCHAR",
+      "active": "BOOLEAN",
+      "folder_id": "VARCHAR",
+      "thumbnail": "VARCHAR",
+      "share_url": "VARCHAR"
+    },
+    "AUTOMATIONS": {
+      "$path": ["/automations"],
+      "$data_path": "automations",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "create_time": "TIMESTAMP",
+      "start_time": "TIMESTAMP",
+      "status": "VARCHAR",
+      "emails_sent": "INTEGER",
+      "recipients[]": {
+        "list_id": "VARCHAR",
+        "list_is_active": "BOOLEAN",
+        "list_name": "VARCHAR",
+        "segment_opts": "VARCHAR",
+        "store_id": "VARCHAR"
+      },
+      "settings[]": {
+        "title": "VARCHAR",
+        "from_name": "VARCHAR",
+        "reply_to": "VARCHAR",
+        "use_conversation": "BOOLEAN",
+        "to_name": "VARCHAR",
+        "authenticate": "BOOLEAN",
+        "auto_footer": "BOOLEAN",
+        "inline_css": "BOOLEAN"
+      },
+      "tracking[]": {
+        "opens": "BOOLEAN",
+        "html_clicks": "BOOLEAN",
+        "text_clicks": "BOOLEAN",
+        "goal_tracking": "BOOLEAN",
+        "ecomm360": "BOOLEAN",
+        "google_analytics": "VARCHAR",
+        "clicktale": "VARCHAR"
+      },
+      "trigger_settings": "VARCHAR",
+      "report_summary": "VARCHAR"
+    },
+    "REPORTS": {
+      "$path": ["/reports"],
+      "$data_path": "reports",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "campaign_title": "VARCHAR",
+      "type": "VARCHAR",
+      "list_id": "VARCHAR",
+      "list_is_active": "BOOLEAN",
+      "list_name": "VARCHAR",
+      "subject_line": "VARCHAR",
+      "preview_text": "VARCHAR",
+      "emails_sent": "INTEGER",
+      "abuse_reports": "INTEGER",
+      "unsubscribed": "INTEGER",
+      "send_time": "TIMESTAMP",
+      "bounces[]": {
+        "hard_bounces": "INTEGER",
+        "soft_bounces": "INTEGER",
+        "syntax_errors": "INTEGER"
+      },
+      "forwards[]": {
+        "forwards_count": "INTEGER",
+        "forwards_opens": "INTEGER"
+      },
+      "opens[]": {
+        "opens_total": "INTEGER",
+        "unique_opens": "INTEGER",
+        "open_rate": "DOUBLE",
+        "last_open": "TIMESTAMP"
+      },
+      "clicks[]": {
+        "clicks_total": "INTEGER",
+        "unique_clicks": "INTEGER",
+        "unique_subscriber_clicks": "INTEGER",
+        "click_rate": "DOUBLE",
+        "last_click": "TIMESTAMP"
+      },
+      "facebook_likes[]": {
+        "recipient_likes": "INTEGER",
+        "unique_likes": "INTEGER",
+        "facebook_likes": "INTEGER"
+      },
+      "industry_stats[]": {
+        "type": "VARCHAR",
+        "open_rate": "DOUBLE",
+        "click_rate": "DOUBLE",
+        "bounce_rate": "DOUBLE",
+        "unopen_rate": "DOUBLE",
+        "unsub_rate": "DOUBLE",
+        "abuse_rate": "DOUBLE"
+      },
+      "list_stats[]": {
+        "sub_rate": "DOUBLE",
+        "unsub_rate": "DOUBLE",
+        "open_rate": "DOUBLE",
+        "click_rate": "DOUBLE"
+      },
+      "timeseries": "VARCHAR",
+      "share_report": "VARCHAR",
+      "ecommerce": "VARCHAR",
+      "delivery_status[]": {
+        "enabled": "BOOLEAN",
+        "can_cancel": "BOOLEAN",
+        "status": "VARCHAR",
+        "emails_sent": "INTEGER",
+        "emails_canceled": "INTEGER"
+      }
+    },
+    "FILE_MANAGER_FILES": {
+      "$path": ["/file-manager/files"],
+      "$data_path": "files",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "INTEGER,$key",
+      "folder_id": "INTEGER",
+      "type": "VARCHAR",
+      "name": "VARCHAR",
+      "full_size_url": "VARCHAR",
+      "thumbnail_url": "VARCHAR",
+      "size": "INTEGER",
+      "created_at": "TIMESTAMP",
+      "created_by": "VARCHAR",
+      "width": "INTEGER",
+      "height": "INTEGER"
+    },
+    "FILE_MANAGER_FOLDERS": {
+      "$path": ["/file-manager/folders"],
+      "$data_path": "folders",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "INTEGER,$key",
+      "name": "VARCHAR",
+      "file_count": "INTEGER",
+      "created_at": "TIMESTAMP",
+      "created_by": "VARCHAR"
+    },
+    "ECOMMERCE_STORES": {
+      "$path": ["/ecommerce/stores"],
+      "$data_path": "stores",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "list_id": "VARCHAR",
+      "name": "VARCHAR",
+      "platform": "VARCHAR",
+      "domain": "VARCHAR",
+      "is_syncing": "BOOLEAN",
+      "email_address": "VARCHAR",
+      "currency_code": "VARCHAR",
+      "money_format": "VARCHAR",
+      "primary_locale": "VARCHAR",
+      "timezone": "VARCHAR",
+      "phone": "VARCHAR",
+      "address[]": {
+        "address1": "VARCHAR",
+        "address2": "VARCHAR",
+        "city": "VARCHAR",
+        "province": "VARCHAR",
+        "province_code": "VARCHAR",
+        "postal_code": "VARCHAR",
+        "country": "VARCHAR",
+        "country_code": "VARCHAR",
+        "longitude": "DOUBLE",
+        "latitude": "DOUBLE"
+      },
+      "connected_site": "VARCHAR",
+      "automations": "VARCHAR",
+      "list_is_active": "BOOLEAN",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    },
+    "VERIFIED_DOMAINS": {
+      "$path": ["/verified-domains"],
+      "$data_path": "domains",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "domain": "VARCHAR,$key",
+      "verified": "BOOLEAN",
+      "authenticated": "BOOLEAN",
+      "verification_sent": "TIMESTAMP",
+      "verification_email": "VARCHAR"
+    },
+    "PING": {
+      "$path": ["/ping"],
+      "health_status": "VARCHAR,$key"
+    },
+    "BATCH_OPERATIONS": {
+      "$path": ["/batches"],
+      "$data_path": "batches",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "status": "VARCHAR",
+      "total_operations": "INTEGER",
+      "finished_operations": "INTEGER",
+      "errored_operations": "INTEGER",
+      "submitted_at": "TIMESTAMP",
+      "completed_at": "TIMESTAMP",
+      "response_body_url": "VARCHAR"
+    },
+    "LANDING_PAGES": {
+      "$path": ["/landing-pages"],
+      "$data_path": "landing_pages",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "title": "VARCHAR",
+      "description": "VARCHAR",
+      "template_id": "INTEGER",
+      "status": "VARCHAR",
+      "list_id": "VARCHAR",
+      "store_id": "VARCHAR",
+      "web_id": "INTEGER",
+      "created_at": "TIMESTAMP",
+      "published_at": "TIMESTAMP",
+      "unpublished_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "url": "VARCHAR",
+      "created_by_source": "VARCHAR",
+      "tracking[]": {
+        "google_analytics": "VARCHAR",
+        "custom_domain": "VARCHAR"
+      }
+    },
+    "CONVERSATIONS": {
+      "$path": ["/conversations"],
+      "$data_path": "conversations",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "message_count": "INTEGER",
+      "campaign_id": "VARCHAR",
+      "list_id": "VARCHAR",
+      "unread_messages": "INTEGER",
+      "from_label": "VARCHAR",
+      "from_email": "VARCHAR",
+      "subject": "VARCHAR",
+      "last_message": "VARCHAR",
+      "updated_at": "TIMESTAMP"
+    },
+    "SURVEYS": {
+      "$path": ["/surveys"],
+      "$data_path": "surveys",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "id": "VARCHAR,$key",
+      "web_id": "INTEGER",
+      "list_id": "VARCHAR",
+      "title": "VARCHAR",
+      "url": "VARCHAR",
+      "status": "VARCHAR",
+      "published_at": "TIMESTAMP",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP",
+      "response_count": "INTEGER"
+    },
+    "CONNECTED_SITES": {
+      "$path": ["/connected-sites"],
+      "$data_path": "sites",
+      "$pagination": {
+        "type": "offset",
+        "offset_param": "offset",
+        "limit_param": "count",
+        "page_size": 100,
+        "initial_offset": 0
+      },
+      "foreign_id": "VARCHAR,$key",
+      "domain": "VARCHAR",
+      "site_script": "VARCHAR",
+      "created_at": "TIMESTAMP",
+      "updated_at": "TIMESTAMP"
+    }
+  }
+}

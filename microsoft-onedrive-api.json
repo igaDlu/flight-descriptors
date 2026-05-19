@@ -1,0 +1,409 @@
+{
+  "$connector_name": "Microsoft OneDrive Connector",
+  "$connector_label": "Microsoft OneDrive",
+  "$connector_description": "Connector for Microsoft OneDrive REST API (Microsoft Graph v1.0) - provides access to drives, files, folders, sharing, and storage quota information across personal and business OneDrive accounts",
+  "$hostname": "https://graph.microsoft.com/v1.0",
+  "$authentication": "oauth2",
+  "$tables": {
+    "MY_DRIVES": {
+      "$path": ["/me/drives"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 999
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "driveType": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "owner": "VARCHAR",
+      "quota[]": {
+        "deleted": "BIGINT",
+        "remaining": "BIGINT",
+        "state": "VARCHAR",
+        "total": "BIGINT",
+        "used": "BIGINT",
+        "fileCount": "BIGINT",
+        "folderCount": "BIGINT"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_ROOT_CHILDREN": {
+      "$path": ["/me/drive/root/children"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 200
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "file": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "image": "VARCHAR",
+      "photo": "VARCHAR",
+      "video": "VARCHAR",
+      "audio": "VARCHAR",
+      "location": "VARCHAR",
+      "deleted": "VARCHAR",
+      "specialFolder": "VARCHAR",
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "shared": "VARCHAR",
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_RECENT": {
+      "$path": ["/me/drive/recent"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 200
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "file": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "image": "VARCHAR",
+      "photo": "VARCHAR",
+      "video": "VARCHAR",
+      "audio": "VARCHAR",
+      "location": "VARCHAR",
+      "deleted": "VARCHAR",
+      "specialFolder": "VARCHAR",
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "remoteItem": "VARCHAR",
+      "shared": "VARCHAR",
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SHARED_WITH_ME": {
+      "$path": ["/me/drive/sharedWithMe"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 200
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "file": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "image": "VARCHAR",
+      "photo": "VARCHAR",
+      "video": "VARCHAR",
+      "audio": "VARCHAR",
+      "location": "VARCHAR",
+      "deleted": "VARCHAR",
+      "specialFolder": "VARCHAR",
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "remoteItem": "VARCHAR",
+      "shared": "VARCHAR",
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SPECIAL_DOCUMENTS": {
+      "$path": ["/me/drive/special/documents"],
+      "$data_path": "value",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "specialFolder[]": {
+        "name": "VARCHAR"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SPECIAL_PHOTOS": {
+      "$path": ["/me/drive/special/photos"],
+      "$data_path": "value",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "specialFolder[]": {
+        "name": "VARCHAR"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SPECIAL_CAMERA_ROLL": {
+      "$path": ["/me/drive/special/cameraroll"],
+      "$data_path": "value",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "specialFolder[]": {
+        "name": "VARCHAR"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SPECIAL_APP_ROOT": {
+      "$path": ["/me/drive/special/approot"],
+      "$data_path": "value",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "specialFolder[]": {
+        "name": "VARCHAR"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SPECIAL_MUSIC": {
+      "$path": ["/me/drive/special/music"],
+      "$data_path": "value",
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "specialFolder[]": {
+        "name": "VARCHAR"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "SITES_ROOT_DRIVES": {
+      "$path": ["/sites/root/drives"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 999
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "driveType": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "owner": "VARCHAR",
+      "quota[]": {
+        "deleted": "BIGINT",
+        "remaining": "BIGINT",
+        "state": "VARCHAR",
+        "total": "BIGINT",
+        "used": "BIGINT",
+        "fileCount": "BIGINT",
+        "folderCount": "BIGINT"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "ALL_DRIVES": {
+      "$path": ["/drives"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 999
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "description": "VARCHAR",
+      "driveType": "VARCHAR",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "owner": "VARCHAR",
+      "quota[]": {
+        "deleted": "BIGINT",
+        "remaining": "BIGINT",
+        "state": "VARCHAR",
+        "total": "BIGINT",
+        "used": "BIGINT",
+        "fileCount": "BIGINT",
+        "folderCount": "BIGINT"
+      },
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_SEARCH": {
+      "$path": ["/me/drive/root/search(q='')"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 200
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "file": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "image": "VARCHAR",
+      "photo": "VARCHAR",
+      "video": "VARCHAR",
+      "audio": "VARCHAR",
+      "location": "VARCHAR",
+      "deleted": "VARCHAR",
+      "specialFolder": "VARCHAR",
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "searchResult": "VARCHAR",
+      "shared": "VARCHAR",
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_FOLLOWED": {
+      "$path": ["/me/drive/following"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 200
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "folder": "VARCHAR",
+      "file": "VARCHAR",
+      "fileSystemInfo[]": {
+        "createdDateTime": "TIMESTAMP",
+        "lastModifiedDateTime": "TIMESTAMP"
+      },
+      "parentReference": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "shared": "VARCHAR",
+      "sharepointIds": "VARCHAR"
+    },
+    "MY_DRIVE_BUNDLES": {
+      "$path": ["/me/drive/bundles"],
+      "$data_path": "value",
+      "$pagination": {
+        "type": "next_url",
+        "next_url_path": "@odata.nextLink",
+        "page_size": 200
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "size": "BIGINT",
+      "webUrl": "VARCHAR",
+      "createdDateTime": "TIMESTAMP",
+      "lastModifiedDateTime": "TIMESTAMP",
+      "cTag": "VARCHAR",
+      "eTag": "VARCHAR",
+      "bundle": "VARCHAR",
+      "folder": "VARCHAR",
+      "createdBy": "VARCHAR",
+      "lastModifiedBy": "VARCHAR",
+      "shared": "VARCHAR"
+    }
+  }
+}

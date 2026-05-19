@@ -1,0 +1,815 @@
+{
+  "$connector_name": "Zoho CRM API Connector",
+  "$connector_label": "Zoho CRM API",
+  "$connector_description": "Connector for Zoho CRM API v3 - provides access to leads, contacts, accounts, deals, campaigns, tasks, vendors, quotes, invoices, and more. Supports multiple Zoho data centers.",
+  "$hostname": "https://{{api_domain}}/crm/v3",
+  "$authentication": "oauth2",
+  "$connection_properties": [
+    {
+      "name": "api_domain",
+      "label": "API Domain",
+      "description": "Your Zoho API domain based on data center (e.g., www.zohoapis.com for US, www.zohoapis.eu for EU, www.zohoapis.in for India, www.zohoapis.com.au for Australia, www.zohoapis.jp for Japan, www.zohoapis.com.cn for China)",
+      "type": "string",
+      "required": true,
+      "default": "www.zohoapis.com"
+    }
+  ],
+  "$tables": {
+    "LEADS": {
+      "$path": ["/Leads"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Company": "VARCHAR",
+      "Email": "VARCHAR",
+      "Description": "VARCHAR",
+      "Rating": "VARCHAR",
+      "Website": "VARCHAR",
+      "Twitter": "VARCHAR",
+      "Salutation": "VARCHAR",
+      "First_Name": "VARCHAR",
+      "Lead_Status": "VARCHAR",
+      "Industry": "VARCHAR",
+      "Skype_ID": "VARCHAR",
+      "Phone": "VARCHAR",
+      "Street": "VARCHAR",
+      "Zip_Code": "VARCHAR",
+      "Email_Opt_Out": "BOOLEAN",
+      "Designation": "VARCHAR",
+      "City": "VARCHAR",
+      "No_of_Employees": "INTEGER",
+      "Mobile": "VARCHAR",
+      "State": "VARCHAR",
+      "Lead_Source": "VARCHAR",
+      "Country": "VARCHAR",
+      "Last_Name": "VARCHAR",
+      "Annual_Revenue": "DOUBLE",
+      "Secondary_Email": "VARCHAR",
+      "Fax": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR",
+      "Unsubscribed_Mode": "VARCHAR",
+      "Unsubscribed_Time": "TIMESTAMP"
+    },
+    "CONTACTS": {
+      "$path": ["/Contacts"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Email": "VARCHAR",
+      "Description": "VARCHAR",
+      "Vendor_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Mailing_Zip": "VARCHAR",
+      "Other_Phone": "VARCHAR",
+      "Mailing_State": "VARCHAR",
+      "Twitter": "VARCHAR",
+      "Other_Zip": "VARCHAR",
+      "Mailing_Street": "VARCHAR",
+      "Other_State": "VARCHAR",
+      "Salutation": "VARCHAR",
+      "Other_Country": "VARCHAR",
+      "Last_Activity_Time": "TIMESTAMP",
+      "First_Name": "VARCHAR",
+      "Full_Name": "VARCHAR",
+      "Asst_Phone": "VARCHAR",
+      "Department": "VARCHAR",
+      "Account_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Email_Opt_Out": "BOOLEAN",
+      "Mobile": "VARCHAR",
+      "Reporting_To[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Other_City": "VARCHAR",
+      "Mailing_Country": "VARCHAR",
+      "Last_Name": "VARCHAR",
+      "Lead_Source": "VARCHAR",
+      "Phone": "VARCHAR",
+      "Home_Phone": "VARCHAR",
+      "Mailing_City": "VARCHAR",
+      "Other_Street": "VARCHAR",
+      "Assistant": "VARCHAR",
+      "Secondary_Email": "VARCHAR",
+      "Title": "VARCHAR",
+      "Skype_ID": "VARCHAR",
+      "Fax": "VARCHAR",
+      "Date_of_Birth": "DATE",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "ACCOUNTS": {
+      "$path": ["/Accounts"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Account_Type": "VARCHAR",
+      "Rating": "VARCHAR",
+      "Account_Site": "VARCHAR",
+      "Parent_Account[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Phone": "VARCHAR",
+      "Billing_Country": "VARCHAR",
+      "Account_Name": "VARCHAR",
+      "Account_Number": "VARCHAR",
+      "Ticker_Symbol": "VARCHAR",
+      "Billing_Street": "VARCHAR",
+      "Shipping_State": "VARCHAR",
+      "Billing_Code": "VARCHAR",
+      "Shipping_Country": "VARCHAR",
+      "Shipping_City": "VARCHAR",
+      "Billing_City": "VARCHAR",
+      "SIC_Code": "VARCHAR",
+      "Billing_State": "VARCHAR",
+      "Website": "VARCHAR",
+      "Shipping_Street": "VARCHAR",
+      "Employees": "INTEGER",
+      "Ownership": "VARCHAR",
+      "Industry": "VARCHAR",
+      "Shipping_Code": "VARCHAR",
+      "Description": "VARCHAR",
+      "Fax": "VARCHAR",
+      "Annual_Revenue": "DOUBLE",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "DEALS": {
+      "$path": ["/Deals"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Description": "VARCHAR",
+      "Campaign_Source[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Closing_Date": "DATE",
+      "Stage": "VARCHAR",
+      "Account_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Type": "VARCHAR",
+      "Probability": "DOUBLE",
+      "Next_Step": "VARCHAR",
+      "Expected_Revenue": "DOUBLE",
+      "Lead_Conversion_Time": "INTEGER",
+      "Amount": "DOUBLE",
+      "Contact_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Deal_Name": "VARCHAR",
+      "Lead_Source": "VARCHAR",
+      "Overall_Sales_Duration": "INTEGER",
+      "Sales_Cycle_Duration": "INTEGER",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "CAMPAIGNS": {
+      "$path": ["/Campaigns"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Description": "VARCHAR",
+      "Campaign_Name": "VARCHAR",
+      "Status": "VARCHAR",
+      "Type": "VARCHAR",
+      "Start_Date": "DATE",
+      "End_Date": "DATE",
+      "Expected_Revenue": "DOUBLE",
+      "Budgeted_Cost": "DOUBLE",
+      "Actual_Cost": "DOUBLE",
+      "Expected_Response": "VARCHAR",
+      "Num_sent": "INTEGER",
+      "Parent_Campaign[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "TASKS": {
+      "$path": ["/Tasks"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Description": "VARCHAR",
+      "Due_Date": "DATE",
+      "Priority": "VARCHAR",
+      "Status": "VARCHAR",
+      "Closed_Time": "TIMESTAMP",
+      "Subject": "VARCHAR",
+      "Send_Notification_Email": "BOOLEAN",
+      "Remind_At": "TIMESTAMP",
+      "Who_Id[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "module": "VARCHAR"
+      },
+      "What_Id[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "module": "VARCHAR"
+      },
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "VENDORS": {
+      "$path": ["/Vendors"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Vendor_Name": "VARCHAR",
+      "Email": "VARCHAR",
+      "Phone": "VARCHAR",
+      "Website": "VARCHAR",
+      "GL_Account": "VARCHAR",
+      "Category": "VARCHAR",
+      "Street": "VARCHAR",
+      "City": "VARCHAR",
+      "State": "VARCHAR",
+      "Zip_Code": "VARCHAR",
+      "Country": "VARCHAR",
+      "Description": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "QUOTES": {
+      "$path": ["/Quotes"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Subject": "VARCHAR",
+      "Quote_Stage": "VARCHAR",
+      "Deal_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Account_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Contact_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Valid_Till": "DATE",
+      "Team": "VARCHAR",
+      "Carrier": "VARCHAR",
+      "Quote_Number": "VARCHAR",
+      "Billing_Street": "VARCHAR",
+      "Billing_City": "VARCHAR",
+      "Billing_State": "VARCHAR",
+      "Billing_Code": "VARCHAR",
+      "Billing_Country": "VARCHAR",
+      "Shipping_Street": "VARCHAR",
+      "Shipping_City": "VARCHAR",
+      "Shipping_State": "VARCHAR",
+      "Shipping_Code": "VARCHAR",
+      "Shipping_Country": "VARCHAR",
+      "Sub_Total": "DOUBLE",
+      "Discount": "DOUBLE",
+      "Tax": "DOUBLE",
+      "Adjustment": "DOUBLE",
+      "Grand_Total": "DOUBLE",
+      "Terms_and_Conditions": "VARCHAR",
+      "Description": "VARCHAR",
+      "Product_Details": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "INVOICES": {
+      "$path": ["/Invoices"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Subject": "VARCHAR",
+      "Invoice_Date": "DATE",
+      "Due_Date": "DATE",
+      "Status": "VARCHAR",
+      "Sales_Order[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Account_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Contact_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Purchase_Order": "VARCHAR",
+      "Excise_Duty": "DOUBLE",
+      "Invoice_Number": "VARCHAR",
+      "Billing_Street": "VARCHAR",
+      "Billing_City": "VARCHAR",
+      "Billing_State": "VARCHAR",
+      "Billing_Code": "VARCHAR",
+      "Billing_Country": "VARCHAR",
+      "Shipping_Street": "VARCHAR",
+      "Shipping_City": "VARCHAR",
+      "Shipping_State": "VARCHAR",
+      "Shipping_Code": "VARCHAR",
+      "Shipping_Country": "VARCHAR",
+      "Sub_Total": "DOUBLE",
+      "Discount": "DOUBLE",
+      "Tax": "DOUBLE",
+      "Adjustment": "DOUBLE",
+      "Grand_Total": "DOUBLE",
+      "Terms_and_Conditions": "VARCHAR",
+      "Description": "VARCHAR",
+      "Product_Details": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "PRODUCTS": {
+      "$path": ["/Products"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Product_Name": "VARCHAR",
+      "Product_Code": "VARCHAR",
+      "Product_Category": "VARCHAR",
+      "Vendor_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Manufacturer": "VARCHAR",
+      "Sales_Start_Date": "DATE",
+      "Sales_End_Date": "DATE",
+      "Support_Start_Date": "DATE",
+      "Support_Expiry_Date": "DATE",
+      "Unit_Price": "DOUBLE",
+      "Commission_Rate": "DOUBLE",
+      "Tax": "VARCHAR",
+      "Taxable": "BOOLEAN",
+      "Reorder_Level": "INTEGER",
+      "Qty_Ordered": "DOUBLE",
+      "Qty_in_Stock": "DOUBLE",
+      "Handler[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Qty_in_Demand": "DOUBLE",
+      "Product_Active": "BOOLEAN",
+      "Usage_Unit": "VARCHAR",
+      "Qty_per_Unit": "INTEGER",
+      "Description": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "PRICE_BOOKS": {
+      "$path": ["/Price_Books"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Price_Book_Name": "VARCHAR",
+      "Pricing_Details": "VARCHAR",
+      "Pricing_Model": "VARCHAR",
+      "Description": "VARCHAR",
+      "Active": "BOOLEAN",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "SALES_ORDERS": {
+      "$path": ["/Sales_Orders"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Subject": "VARCHAR",
+      "Customer_No": "VARCHAR",
+      "Quote_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Pending": "VARCHAR",
+      "Carrier": "VARCHAR",
+      "Status": "VARCHAR",
+      "Sales_Commission": "DOUBLE",
+      "Account_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Contact_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Deal_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Purchase_Order": "VARCHAR",
+      "Due_Date": "DATE",
+      "Excise_Duty": "DOUBLE",
+      "SO_Number": "VARCHAR",
+      "Billing_Street": "VARCHAR",
+      "Billing_City": "VARCHAR",
+      "Billing_State": "VARCHAR",
+      "Billing_Code": "VARCHAR",
+      "Billing_Country": "VARCHAR",
+      "Shipping_Street": "VARCHAR",
+      "Shipping_City": "VARCHAR",
+      "Shipping_State": "VARCHAR",
+      "Shipping_Code": "VARCHAR",
+      "Shipping_Country": "VARCHAR",
+      "Sub_Total": "DOUBLE",
+      "Discount": "DOUBLE",
+      "Tax": "DOUBLE",
+      "Adjustment": "DOUBLE",
+      "Grand_Total": "DOUBLE",
+      "Terms_and_Conditions": "VARCHAR",
+      "Description": "VARCHAR",
+      "Product_Details": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "PURCHASE_ORDERS": {
+      "$path": ["/Purchase_Orders"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Subject": "VARCHAR",
+      "Vendor_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Requisition_No": "VARCHAR",
+      "Tracking_Number": "VARCHAR",
+      "Contact_Name[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR"
+      },
+      "Due_Date": "DATE",
+      "Carrier": "VARCHAR",
+      "Status": "VARCHAR",
+      "Sales_Commission": "DOUBLE",
+      "Excise_Duty": "DOUBLE",
+      "PO_Number": "VARCHAR",
+      "Billing_Street": "VARCHAR",
+      "Billing_City": "VARCHAR",
+      "Billing_State": "VARCHAR",
+      "Billing_Code": "VARCHAR",
+      "Billing_Country": "VARCHAR",
+      "Shipping_Street": "VARCHAR",
+      "Shipping_City": "VARCHAR",
+      "Shipping_State": "VARCHAR",
+      "Shipping_Code": "VARCHAR",
+      "Shipping_Country": "VARCHAR",
+      "Sub_Total": "DOUBLE",
+      "Discount": "DOUBLE",
+      "Tax": "DOUBLE",
+      "Adjustment": "DOUBLE",
+      "Grand_Total": "DOUBLE",
+      "Terms_and_Conditions": "VARCHAR",
+      "Description": "VARCHAR",
+      "Product_Details": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    },
+    "CALLS": {
+      "$path": ["/Calls"],
+      "$data_path": "data",
+      "$pagination": {
+        "type": "page",
+        "page_param": "page",
+        "limit_param": "per_page",
+        "page_size": 200,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "Owner[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Subject": "VARCHAR",
+      "Call_Type": "VARCHAR",
+      "Call_Start_Time": "TIMESTAMP",
+      "Call_Duration": "VARCHAR",
+      "Call_Duration_in_seconds": "INTEGER",
+      "Description": "VARCHAR",
+      "Reminder": "TIMESTAMP",
+      "Who_Id[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "module": "VARCHAR"
+      },
+      "What_Id[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "module": "VARCHAR"
+      },
+      "Call_Purpose": "VARCHAR",
+      "Call_Agenda": "VARCHAR",
+      "Call_Result": "VARCHAR",
+      "Created_Time": "TIMESTAMP",
+      "Modified_Time": "TIMESTAMP",
+      "Created_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Modified_By[]": {
+        "name": "VARCHAR",
+        "id": "VARCHAR",
+        "email": "VARCHAR"
+      },
+      "Tag": "VARCHAR"
+    }
+  }
+}
