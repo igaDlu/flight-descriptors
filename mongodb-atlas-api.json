@@ -1,0 +1,412 @@
+{
+  "$connector_name": "MongoDB Atlas API Connector",
+  "$connector_label": "MongoDB Atlas API",
+  "$connector_description": "Connector for MongoDB Atlas Admin API v2 - provides access to organizations, projects, clusters, database users, backups, events, alerts, and more",
+  "$hostname": "https://cloud.mongodb.com",
+  "$authentication": "basic",
+  "$tables": {
+    "PROJECTS": {
+      "$path": ["/api/atlas/v2/groups"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "orgId": "VARCHAR",
+      "clusterCount": "INTEGER",
+      "created": "TIMESTAMP",
+      "links": "VARCHAR"
+    },
+    "CLUSTERS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/clusters"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "groupId": "VARCHAR",
+      "clusterType": "VARCHAR",
+      "mongoDBVersion": "VARCHAR",
+      "mongoDBMajorVersion": "VARCHAR",
+      "createDate": "TIMESTAMP",
+      "stateName": "VARCHAR",
+      "paused": "BOOLEAN",
+      "pitEnabled": "BOOLEAN",
+      "backupEnabled": "BOOLEAN",
+      "providerSettings[]": {
+        "providerName": "VARCHAR",
+        "instanceSizeName": "VARCHAR",
+        "regionName": "VARCHAR",
+        "diskIOPS": "INTEGER",
+        "encryptEBSVolume": "BOOLEAN",
+        "volumeType": "VARCHAR"
+      },
+      "replicationSpecs": "VARCHAR",
+      "connectionStrings[]": {
+        "standard": "VARCHAR",
+        "standardSrv": "VARCHAR",
+        "private": "VARCHAR",
+        "privateSrv": "VARCHAR"
+      },
+      "diskSizeGB": "DOUBLE",
+      "numShards": "INTEGER",
+      "replicationFactor": "INTEGER",
+      "autoScaling[]": {
+        "diskGBEnabled": "BOOLEAN"
+      },
+      "labels": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "DATABASE_USERS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/databaseUsers"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "username": "VARCHAR,$key",
+      "groupId": "VARCHAR",
+      "databaseName": "VARCHAR",
+      "deleteAfterDate": "TIMESTAMP",
+      "labels": "VARCHAR",
+      "ldapAuthType": "VARCHAR",
+      "x509Type": "VARCHAR",
+      "awsIAMType": "VARCHAR",
+      "roles": "VARCHAR",
+      "scopes": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "ORGANIZATIONS": {
+      "$path": ["/api/atlas/v2/orgs"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "isDeleted": "BOOLEAN",
+      "links": "VARCHAR"
+    },
+    "BACKUP_SNAPSHOTS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/clusters/{clusterName}/backup/snapshots"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "clusterId": "VARCHAR",
+      "clusterName": "VARCHAR",
+      "groupId": "VARCHAR",
+      "snapshotType": "VARCHAR",
+      "status": "VARCHAR",
+      "createdAt": "TIMESTAMP",
+      "expiresAt": "TIMESTAMP",
+      "description": "VARCHAR",
+      "storageSizeBytes": "BIGINT",
+      "mongodVersion": "VARCHAR",
+      "replicaSetName": "VARCHAR",
+      "type": "VARCHAR",
+      "cloudProvider": "VARCHAR",
+      "members": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "EVENTS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/events"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "groupId": "VARCHAR",
+      "eventTypeName": "VARCHAR",
+      "created": "TIMESTAMP",
+      "isGlobalAdmin": "BOOLEAN",
+      "username": "VARCHAR",
+      "userId": "VARCHAR",
+      "remoteAddress": "VARCHAR",
+      "clusterName": "VARCHAR",
+      "replicaSetName": "VARCHAR",
+      "opType": "VARCHAR",
+      "port": "INTEGER",
+      "database": "VARCHAR",
+      "collection": "VARCHAR",
+      "targetUsername": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "ALERTS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/alerts"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "groupId": "VARCHAR",
+      "alertConfigId": "VARCHAR",
+      "eventTypeName": "VARCHAR",
+      "status": "VARCHAR",
+      "acknowledgedUntil": "TIMESTAMP",
+      "acknowledgingUsername": "VARCHAR",
+      "created": "TIMESTAMP",
+      "updated": "TIMESTAMP",
+      "resolved": "TIMESTAMP",
+      "lastNotified": "TIMESTAMP",
+      "clusterName": "VARCHAR",
+      "replicaSetName": "VARCHAR",
+      "metricName": "VARCHAR",
+      "currentValue[]": {
+        "number": "DOUBLE",
+        "units": "VARCHAR"
+      },
+      "hostnameAndPort": "VARCHAR",
+      "hostId": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "ALERT_CONFIGURATIONS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/alertConfigs"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "groupId": "VARCHAR",
+      "eventTypeName": "VARCHAR",
+      "enabled": "BOOLEAN",
+      "created": "TIMESTAMP",
+      "updated": "TIMESTAMP",
+      "matchers": "VARCHAR",
+      "notifications": "VARCHAR",
+      "metricThreshold[]": {
+        "metricName": "VARCHAR",
+        "operator": "VARCHAR",
+        "threshold": "DOUBLE",
+        "units": "VARCHAR",
+        "mode": "VARCHAR"
+      },
+      "threshold[]": {
+        "operator": "VARCHAR",
+        "threshold": "INTEGER",
+        "units": "VARCHAR"
+      },
+      "links": "VARCHAR"
+    },
+    "BACKUP_COMPLIANCE_POLICY": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/backupCompliancePolicy"],
+      "authorizedEmail": "VARCHAR",
+      "authorizedUserFirstName": "VARCHAR",
+      "authorizedUserLastName": "VARCHAR",
+      "copyProtectionEnabled": "BOOLEAN",
+      "encryptionAtRestEnabled": "BOOLEAN",
+      "pitEnabled": "BOOLEAN",
+      "projectId": "VARCHAR,$key",
+      "restoreWindowDays": "INTEGER",
+      "state": "VARCHAR",
+      "updatedDate": "TIMESTAMP",
+      "updatedUser": "VARCHAR",
+      "onDemandPolicyItem[]": {
+        "frequencyInterval": "INTEGER",
+        "frequencyType": "VARCHAR",
+        "retentionUnit": "VARCHAR",
+        "retentionValue": "INTEGER"
+      },
+      "scheduledPolicyItems": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "CLOUD_PROVIDER_ACCESS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/cloudProviderAccess"],
+      "$data_path": "awsIamRoles",
+      "atlasAWSAccountArn": "VARCHAR",
+      "atlasAssumedRoleExternalId": "VARCHAR",
+      "authorizedDate": "TIMESTAMP",
+      "createdDate": "TIMESTAMP",
+      "featureUsages": "VARCHAR",
+      "iamAssumedRoleArn": "VARCHAR",
+      "providerName": "VARCHAR",
+      "roleId": "VARCHAR,$key"
+    },
+    "NETWORK_PEERING": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/peers"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "containerId": "VARCHAR",
+      "providerName": "VARCHAR",
+      "accepterRegionName": "VARCHAR",
+      "awsAccountId": "VARCHAR",
+      "connectionId": "VARCHAR",
+      "errorStateName": "VARCHAR",
+      "routeTableCidrBlock": "VARCHAR",
+      "statusName": "VARCHAR",
+      "vpcId": "VARCHAR",
+      "azureDirectoryId": "VARCHAR",
+      "azureSubscriptionId": "VARCHAR",
+      "resourceGroupName": "VARCHAR",
+      "vnetName": "VARCHAR",
+      "gcpProjectId": "VARCHAR",
+      "networkName": "VARCHAR",
+      "atlasCidrBlock": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "PRIVATE_ENDPOINTS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/privateEndpoint"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "cloudProvider": "VARCHAR",
+      "endpointServiceName": "VARCHAR",
+      "errorMessage": "VARCHAR",
+      "interfaceEndpoints": "VARCHAR",
+      "privateEndpoints": "VARCHAR",
+      "privateLinkServiceName": "VARCHAR",
+      "privateLinkServiceResourceId": "VARCHAR",
+      "regionName": "VARCHAR",
+      "status": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "CUSTOM_DB_ROLES": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/customDBRoles/roles"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "roleName": "VARCHAR,$key",
+      "actions": "VARCHAR",
+      "inheritedRoles": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "MAINTENANCE_WINDOWS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/maintenanceWindow"],
+      "dayOfWeek": "INTEGER",
+      "hourOfDay": "INTEGER",
+      "startASAP": "BOOLEAN",
+      "numberOfDeferrals": "INTEGER",
+      "autoDeferOnceEnabled": "BOOLEAN",
+      "ROWID": "VARCHAR,$key"
+    },
+    "PROCESS_MEASUREMENTS": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/processes/{processId}/measurements"],
+      "$data_path": "measurements",
+      "name": "VARCHAR,$key",
+      "units": "VARCHAR",
+      "period": "VARCHAR",
+      "granularity": "VARCHAR",
+      "dataPoints": "VARCHAR",
+      "links": "VARCHAR"
+    },
+    "PROCESS_DATABASES": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/processes/{processId}/databases"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "databaseName": "VARCHAR,$key",
+      "links": "VARCHAR"
+    },
+    "DATA_LAKES": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/dataLakes"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "name": "VARCHAR,$key",
+      "groupId": "VARCHAR",
+      "state": "VARCHAR",
+      "hostnames": "VARCHAR",
+      "storage[]": {
+        "databases": "VARCHAR",
+        "stores": "VARCHAR"
+      },
+      "dataProcessRegion[]": {
+        "cloudProvider": "VARCHAR",
+        "region": "VARCHAR"
+      },
+      "links": "VARCHAR"
+    },
+    "SERVERLESS_INSTANCES": {
+      "$path": ["/api/atlas/v2/groups/{groupId}/serverless"],
+      "$data_path": "results",
+      "$pagination": {
+        "type": "page",
+        "page_param": "pageNum",
+        "limit_param": "itemsPerPage",
+        "page_size": 100,
+        "initial_page": 1
+      },
+      "id": "VARCHAR,$key",
+      "name": "VARCHAR",
+      "groupId": "VARCHAR",
+      "mongoDBVersion": "VARCHAR",
+      "createDate": "TIMESTAMP",
+      "stateName": "VARCHAR",
+      "connectionStrings[]": {
+        "standardSrv": "VARCHAR",
+        "privateEndpoint": "VARCHAR"
+      },
+      "providerSettings[]": {
+        "providerName": "VARCHAR",
+        "regionName": "VARCHAR",
+        "backingProviderName": "VARCHAR"
+      },
+      "serverlessBackupOptions[]": {
+        "serverlessContinuousBackupEnabled": "BOOLEAN"
+      },
+      "links": "VARCHAR"
+    }
+  }
+}
